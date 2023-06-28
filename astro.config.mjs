@@ -15,7 +15,8 @@ const defaultLocale = "ko";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://hoqn.net",
+  site: "https://hoqn.github.io",
+  base: "/svenska",
   srcDir: './src',
   vite: {
     plugins: [yaml()],
