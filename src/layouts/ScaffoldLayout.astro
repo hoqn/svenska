@@ -1,0 +1,36 @@
+---
+import MainFooter from "@/components/MainFooter.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+import type { SiteMeta } from "hoqn";
+import MainHeader from "@/components/MainHeader.astro";
+
+export interface Props {
+  lang?: string;
+  meta?: Partial<SiteMeta>;
+}
+
+const { meta, lang } = Astro.props;
+---
+
+<BaseLayout lang={lang} {meta}>
+  {/* HEADER */}
+  <slot name="header">
+    <MainHeader />
+  </slot>
+  {/* CONTENT */}
+  <main id="swup" class="main">
+    <slot />
+  </main>
+  {/* FOOTER */}
+  <slot name="footer">
+    <MainFooter />
+  </slot>
+</BaseLayout>
+
+<style lang="scss">
+  .main {
+    padding-top: var(--header-height);
+    height: 100%;
+  }
+</style>

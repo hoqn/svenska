@@ -1,0 +1,26 @@
+@use "sass:map" as map;
+
+$breakpoints: (
+  sm2md: 426px,
+  md2lg: 768px,
+) !default;
+
+/* MOBILE FIRST */
+
+@mixin only-sm {
+  @media screen and (max-width: #{map.get($breakpoints, sm2md) - 1px}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media screen and (min-width: map.get($breakpoints, sm2md)) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media screen and (min-width: map.get($breakpoints, md2lg)) {
+    @content;
+  }
+}

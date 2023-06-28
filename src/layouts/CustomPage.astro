@@ -1,0 +1,72 @@
+---
+import ScaffoldLayout from "./ScaffoldLayout.astro";
+
+interface Frontmatter {
+  title: string;
+  subtitle?: string;
+}
+
+export interface Props {
+  frontmatter: Frontmatter;
+}
+
+const {
+  frontmatter: { title, subtitle },
+} = Astro.props;
+---
+
+<ScaffoldLayout>
+  <header class="page-header">
+    <div class="page-header__inner container">
+      <h2 class="page-header__title">
+        {title}
+      </h2>
+      {subtitle && <h4 class="page-header__subtitle">{subtitle}</h4>}
+    </div>
+  </header>
+  <article class="page-body">
+    <div class="container">
+      <div class="markdown-body">
+        <slot />
+      </div>
+    </div>
+  </article>
+</ScaffoldLayout>
+
+<style lang="scss">
+  @use "../styles/color" as color;
+
+  /* Header */
+  .page-header {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    &__inner {
+      z-index: 1;
+      position: relative;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      background-color: color.primary(3);
+    }
+
+    &__title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      line-height: 2rem;
+      color: color.primary(12);
+    }
+    
+    &__subtitle {
+      margin-top: .5rem;
+      //
+      font-size: 1.125rem;
+      font-weight: normal;
+      line-height: 1.5rem;
+      color: color.primary(11);
+    }
+  }
+
+  .page-body {
+    padding-bottom: 8rem;
+  }
+</style>

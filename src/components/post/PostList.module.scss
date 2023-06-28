@@ -1,0 +1,11 @@
+@use "/src/styles/color" as color;
+
+.post-list {
+
+}
+
+.post-list__item {
+  & + & {
+    border-top: 1px solid color.primary(6);
+  }
+}

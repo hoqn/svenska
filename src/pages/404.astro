@@ -1,0 +1,49 @@
+---
+import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
+
+---
+
+<ScaffoldLayout>
+  <div class="body">
+    <div class="content">
+      <h1 class="content__title">404</h1>
+      <h4 class="content__subtitle">이런!</h1>
+      <p class="content__desc">없는 페이지예요. 주소를 다시 확인해주세요.</p>
+    </div>
+  </div>
+</ScaffoldLayout>
+
+<style lang="scss">
+  @use "../styles/color" as color;
+
+  .body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+  }
+
+  .content {
+    text-align: center;
+
+    &__title {
+      color: color.primary(11);
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    &__subtitle {
+      color: color.primary(11);
+      margin-top: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    &__desc {
+      color: color.primary(12);
+      margin-top: 2.5rem;
+      font-size: 1rem;
+      font-weight: normal;
+    }
+  }
+</style>

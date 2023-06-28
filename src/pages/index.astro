@@ -1,0 +1,224 @@
+---
+import { getEntry, getEntryBySlug } from "astro:content";
+import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
+import Greeting from "@/components/Greeting";
+
+const indexPage = await getEntryBySlug("pages", "index");
+const { data, render } = indexPage;
+const { Content: IndexPageContent } = await render();
+
+//i18n
+import { staticI18n } from "@/core/i18n";
+import i18next, { t } from "i18next";
+
+const locale = staticI18n(Astro.url.pathname);
+---
+
+<ScaffoldLayout lang={locale} meta={{
+	themeColor: "hsl(121, 47.5%, 91.4%)",
+}}>
+	<!-- HERO SECTION -->
+	<section class="hero-section container">
+		<div class="content-box">
+			<div class="content-box__left">
+				<Greeting className="content-box__title" />
+				<h4 class="content-box__subtitle">Web FE Developer</h4>
+			</div>
+			<div class="content-box__right">
+				<div class="content-box__profile-img">
+					<!-- <img src="https://placehold.co/136x136" /> -->
+					<!-- <img src="/avatar.svg" /> -->
+					<div></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ARTICLE SECTION -->
+	<section class="article-section container">
+		<article class="article-container">
+			<h2 class="article-h">{data.name}</h2>
+			<div class="article-body">
+				<IndexPageContent />
+			</div>
+		</article>
+	</section>
+	<!-- LINKS SECTION -->
+	<section class="links-section container">
+		<div class="links">
+			{
+				Object.entries(data.links).map(([name, href]: any) => (
+					<a class="links__item" href={href}>
+						{name}
+					</a>
+				))
+			}
+		</div>
+	</section>
+</ScaffoldLayout>
+
+<style lang="scss">
+	@use "/src/styles/media" as media;
+	@use "/src/styles/color" as color;
+
+	/* HERO */
+
+	.hero-section {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: min(80vh, 480px);
+
+		border-bottom: 1px solid color.primary(6);
+	}
+
+	.content-box {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+
+		&__right {
+			padding-top: 2rem;
+			> * {
+				margin-left: auto;
+			}
+		}
+
+		@include media.lg {
+			flex-direction: row;
+
+			&__left {
+				flex: 1 1 0%;
+			}
+
+			&__right {
+				flex: none;
+			}
+		}
+
+		&__title {
+			font-size: 2rem;
+			line-height: 2.25rem;
+			font-weight: bold;
+			color: color.primary(12);
+
+			@include media.lg {
+				font-size: 3.5rem;
+				line-height: 4rem;
+			}
+		}
+
+		&__subtitle {
+			margin-top: 1rem;
+			font-size: 1.5rem;
+			line-height: 2rem;
+			font-weight: 600;
+			color: color.primary(11);
+		}
+
+		&__profile-img {
+			overflow: hidden;
+			border-radius: 0.5rem;
+
+			width: 216px;
+			height: 216px;
+
+			&::before {
+				float: left;
+				padding-top: 75%;
+				content: "";
+			}
+
+			&::after {
+				display: block;
+				content: "";
+				clear: both;
+			}
+
+			// > img {
+			> div {
+				width: 100%;
+				height: 100%;
+
+				& {
+					cursor: grab;
+					transition: 0.1s;
+					background: url(/avatar.svg) color.primary(2);
+					background-blend-mode: darken;
+				}
+				&:hover {
+					background: url(/avatar-alter.svg) color.primary(3);
+					background-blend-mode: darken;
+				}
+			}
+		}
+	}
+
+	/* ARTICLE */
+
+	.article-section {
+		padding: {
+			top: 4rem;
+			bottom: 2rem;
+		}
+
+		.article-container {
+			font-size: 1rem;
+			font-weight: normal;
+			line-height: 1.5rem;
+			color: color.primary(12);
+		}
+
+		.article-h {
+			font-size: 1.5rem;
+			font-weight: bold;
+			line-height: 1.75rem;
+		}
+
+		.article-p,
+		.article-body :global(p) {
+			margin-top: 1rem;
+		}
+	}
+
+	/* LINKS */
+
+	.links-section {
+		padding-top: 0;
+		padding-bottom: 4rem;
+
+		.links {
+			display: flex;
+			flex-direction: row;
+
+			> * + * {
+				margin-left: 0.5rem;
+			}
+		}
+
+		.links__item {
+			font-weight: 600;
+			font-size: 1rem;
+			line-height: 1.75rem;
+			background-color: color.primary(3);
+			padding: 0 1rem;
+			border-radius: 99999px;
+			border: solid 1px color.primary(6);
+			color: color.primary(11);
+
+			cursor: pointer;
+			transition: 0.12s ease-in;
+
+			&:hover {
+				background-color: color.primary(4);
+				border-color: color.primary(8);
+			}
+			&:focus {
+				border-color: color.primary(8);
+			}
+			&:active {
+				background-color: color.primary(5);
+			}
+		}
+	}
+</style>

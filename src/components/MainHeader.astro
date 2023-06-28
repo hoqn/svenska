@@ -1,0 +1,264 @@
+---
+import { t } from "i18next";
+import { localizePath } from "astro-i18next";
+import { LanguageSelector } from "astro-i18next/components";
+import { staticI18n } from "@/core/i18n";
+
+const locale = staticI18n(Astro.url.pathname);
+
+const menuItems: { label: string; href: string }[] = [
+  { label: t("navigation.posts"), href: localizePath("/post", locale) },
+  { label: t("navigation.about"), href: localizePath("/about", locale) },
+  { label: t("navigation.works"), href: localizePath("/works", locale) },
+  { label: t("navigation.contact"), href: localizePath("/contact", locale) },
+];
+---
+
+<header class="main-header">
+  <div class="main-header__inner container">
+    <input type="checkbox" id="menu-handle" class="menu-handle__input" hidden />
+    {/* Floating */}
+    <div class="floating-content container">
+      <label
+        for="menu-handle"
+        class="menu-handle pressable pressable--opacity"
+        data-s-open="메뉴"
+        data-s-close="닫기"
+        aria-label="메뉴"
+      >
+        <i class="menu-handle__icon"></i>
+      </label>
+    </div>
+    {/* Fixed Content */}
+    <div class="fixed-content">
+      <div class="fixed-content__inner">
+        <a class="brand" href={localizePath("/", locale)}>hoqn</a>
+      </div>
+    </div>
+    {/* Auxiliary Content */}
+    <div class="aux-content">
+      <div class="aux-content__inner">
+        <ul class="menu__container">
+          {
+            menuItems.map(({ label, href }) => (
+              <li class="menu__item pressable pressable--opacity">
+                <a href={href}>{label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- <LanguageSelector
+      showFlag={true}
+      languageMapping={{
+        ko: "한국어",
+        en: "English",
+      }}
+    /> -->
+</header>
+
+<style lang="scss">
+  @use "/src/styles/media" as media;
+  @use "/src/styles/color" as color;
+  @use "sass:selector" as selector;
+
+  @mixin menu-opened($selector) {
+    @at-root .menu-handle__input:checked ~ #{$selector} {
+      @content;
+    }
+  }
+
+  /* ROOT */
+  .main-header {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 32;
+
+    color: color.primary(12);
+    backdrop-filter: blur(4px);
+
+    &::before {
+      // 배경 (Opacity 적용하기 위해 따로 했음)
+      position: absolute;
+      content: "";
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transition: background-color 0.2s ease-in;
+      background-color: var(--html-bg);
+      opacity: 0.8;
+      z-index: -1;
+    }
+  }
+
+  /* MAIN FRAGMENTS */
+  .main-header {
+    &__inner {
+      position: relative;
+    }
+
+    .floating-content {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: var(--header-height);
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      min-width: 0px;
+    }
+
+    .fixed-content {
+      display: block;
+      height: 0px;
+      min-height: var(--header-height);
+      @include media.lg {
+        float: left;
+      }
+
+      &__inner {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        height: 100%;
+      }
+    }
+
+    .aux-content {
+      max-height: 0;
+      overflow-y: hidden;
+      position: relative;
+
+      text-align: right;
+
+      &__inner {
+        height: 100%;
+      }
+    }
+  }
+
+  /* Brand */
+  .main-header {
+    .brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      color: color.primary(11);
+    }
+  }
+
+  /* Menu Handle */
+  .main-header {
+    .menu-handle {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+
+      &::before {
+        content: attr(data-s-open);
+        margin-right: 0.5rem;
+      }
+      @include menu-opened("* .menu-handle::before") {
+        content: attr(data-s-close);
+      }
+    }
+
+    .menu-handle__icon {
+      position: relative;
+      display: block;
+      width: 1em;
+      height: 2px;
+      background-color: currentColor;
+      transition: all 0.2s ease-out;
+      border-radius: 999px;
+      opacity: 0.8;
+
+      &::after,
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        transition: all 0.2s ease-out;
+        height: 100%;
+        width: 100%;
+        border-radius: 999px;
+        background-color: currentColor;
+      }
+
+      &::before {
+        top: 6px;
+      }
+      &::after {
+        top: -6px;
+      }
+
+      @include menu-opened("* .menu-handle__icon") {
+        background-color: transparent;
+      }
+      @include menu-opened("* .menu-handle__icon::before") {
+        transform: rotate(-45deg);
+        top: 0;
+      }
+      @include menu-opened("* .menu-handle__icon::after") {
+        transform: rotate(45deg);
+        top: 0;
+      }
+    }
+  }
+
+  /* Menu Items */
+  .main-header {
+    .menu__container {
+      display: block;
+      @include media.lg {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+
+    .menu__item {
+      font-size: 1rem;
+      line-height: 1.25rem;
+      font-weight: 600;
+      padding: 1rem 0;
+      @include media.lg {
+        padding: 0 1rem;
+      }
+    }
+  }
+
+  /* Menu Actions */
+  @include menu-opened(".aux-content") {
+    max-height: 100%;
+  }
+  @include media.lg {
+    .main-header {
+      .aux-content {
+        min-height: var(--header-height);
+        height: var(--header-height);
+        padding-left: 1rem;
+
+        &__inner {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+
+      .menu-handle {
+        display: none;
+      }
+    }
+  }
+</style>

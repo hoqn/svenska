@@ -1,0 +1,116 @@
+@use "/src/styles/media" as media;
+@use "/src/styles/color" as color;
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css");
+
+html {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+html, body {
+  min-height: 100vh;
+}
+
+$container-max-width: 52rem !default;
+
+// Colors
+
+@import "@radix-ui/colors/grass.css";
+@import "@radix-ui/colors/grassDark.css";
+@import "@radix-ui/colors/olive.css";
+@import "@radix-ui/colors/oliveDark.css";
+
+// Global
+
+:root {
+  --html-bg: #{color.primary(2)};
+}
+
+html {
+  transition: background-color 0.2s ease-in;
+  background-color: var(--html-bg);
+}
+
+::selection {
+  background-color: color.primary(5);
+  color: color.primary(12);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: ($container-max-width - 2rem);
+  padding: {
+    left: 1rem;
+    right: 1rem;
+  }
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+// Pressable
+
+.pressable {
+  cursor: pointer;
+
+  &--opacity {
+    transition: .1s ease-in-out;
+    opacity: 1;
+    &:hover {
+      opacity: .6;
+    }
+    &:active {
+      opacity: .25;
+    }
+  }
+}
+
+// Swup
+
+.swup-progress-bar {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  height: 8px;
+  background-color: color.primary(5);
+}
+
+html.is-changing {
+  overflow-y: hidden;
+}
+
+// Header
+
+:root {
+  --header-height: 64px;
+
+  @include media.md {
+    --header-height: 72px;
+  }
+
+  @include media.lg {
+    --header-height: 96px;
+  }
+}
+
+// Markdown Body
+
+.markdown-body {
+  --color-fg-default: color.primary(12) !important;
+  --color-canvas-default: transparent !important;
+
+  text-align: justify;
+
+  ul {
+    list-style-type: disc;
+  }
+
+  em {
+    font-style: italic;
+  }
+}

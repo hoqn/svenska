@@ -1,0 +1,55 @@
+---
+import "github-markdown-css";
+import "@/styles/reset.css";
+import "@/styles/global.scss";
+import "@/styles/h-grid.scss";
+
+import { defaultSiteMeta } from "@/data/site";
+import type { SiteMeta } from "hoqn";
+
+export interface Props {
+  lang?: string;
+  meta?: Partial<SiteMeta>;
+}
+
+const { lang, meta: partialMeta } = Astro.props;
+const meta: SiteMeta = {
+  ...defaultSiteMeta,
+  ...partialMeta,
+}
+---
+
+{/* SWUP */}
+<script>
+  import Swup from "swup";
+  import SwupA11yPlugin from "@swup/a11y-plugin";
+  import SwupHeadPlugin from "@swup/head-plugin";
+  import SwupProgressPlugin from "@swup/progress-plugin";
+  import SwupScrollPlugin from "@swup/scroll-plugin";
+  import SwupSlideTheme from "@swup/slide-theme";
+
+  const swup = new Swup({
+    plugins: [
+      new SwupA11yPlugin(),
+      new SwupHeadPlugin(),
+      new SwupProgressPlugin(),
+      new SwupScrollPlugin(),
+      new SwupSlideTheme(),
+    ],
+  });
+</script>
+
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={meta.desc} />
+    <meta name="theme-color" content={meta.themeColor} />
+    <title>{meta.title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

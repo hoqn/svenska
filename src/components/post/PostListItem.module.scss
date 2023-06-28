@@ -1,0 +1,70 @@
+@use "/src/styles/media" as media;
+@use "/src/styles/color" as color;
+
+.list-item {
+  composes: pressable pressable--opacity from global;
+  position: relative;
+  display: block;
+  //
+  color: color.primary(12);
+}
+
+.list-item__inner {
+  display: block;
+  padding: 1rem 0;
+}
+
+.list-item__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.list-item__subtitle {
+  margin-top: .25rem;
+  //
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.25rem;
+  //
+  &::before {
+    content: "\2014";
+    padding-right: .5rem;
+  }
+}
+
+.list-item__meta {
+  margin-top: .5rem;
+  //
+  font-size: .875rem;
+  font-weight: normal;
+  line-height: 1rem;
+  //
+  color: color.primary(11);
+  opacity: .8;
+}
+
+.list-item__date {
+  & + &::before {
+    content: "\00B7";
+    padding: 0 .5rem;
+  }
+}
+
+.list-item__tags {
+  display: block;
+  list-style: none;
+}
+
+.list-item__tag {
+  display: inline;
+}
+
+.list-item__tag-link {
+  display: inline;
+  //
+  &::before {
+    content: "#";
+    display: inline;
+  }
+}

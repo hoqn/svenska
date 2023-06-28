@@ -1,0 +1,61 @@
+// Shaking Hand
+.shaking-hand {
+  display: inline-block;
+  @extend %shaking-hand-icon;
+  @extend %shaking-hand-anim;
+}
+
+%shaking-hand-icon {
+  $rotate: -24deg;
+
+  &::before {
+    content: "";
+    display: block;
+    background: url(/raised_hand_color_default.svg) no-repeat center;
+    background-size: 100% 100%;
+    transform: rotate($rotate);
+    width: 1em;
+    height: 1em;
+    //
+    position: relative;
+  }
+  transform-origin: 60% 80%;
+}
+
+%shaking-hand-anim {
+  animation-name: handshake;
+  animation-duration: 1.4s;
+  animation-delay: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+}
+
+// Shaking Hand - Anim
+@keyframes handshake {
+  $base-degree: 0deg;
+
+  0% {
+    transform: rotate($base-degree + 0deg);
+  }
+
+  10% {
+    transform: rotate($base-degree - 20deg);
+  }
+
+  25% {
+    transform: rotate($base-degree + 42deg);
+  }
+
+  50% {
+    transform: rotate($base-degree - 20deg);
+  }
+
+  75% {
+    transform: rotate($base-degree + 42deg);
+  }
+
+  100% {
+    transform: rotate($base-degree + 0deg);
+  }
+}

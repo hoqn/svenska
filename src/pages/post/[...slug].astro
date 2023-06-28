@@ -1,0 +1,123 @@
+---
+import { getCollection } from "astro:content";
+import format from 'date-fns/format/index';
+import ko from 'date-fns/locale/ko/index';
+import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
+
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+export const getStaticPaths: GetStaticPaths = async function () {
+  const posts = await getCollection("posts");
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+};
+
+//
+
+export interface Props {
+  entry: CollectionEntry<"posts">;
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
+---
+
+<ScaffoldLayout>
+  <!-- POST CONTENT SECTION -->
+  <section class="post-section">
+    <header class="post-section__header container">
+      <h2 class="post-section__title">{entry.data.title}</h2>
+      {entry.data.subtitle && <h4 class="post-section__subtitle">{entry.data.subtitle}</h4>}
+      <div class="post-section__meta-container">
+        {
+          entry.data.edited_at && (
+            <span class="post-section__meta">
+              <span class="post-section__meta-name">수정일</span>
+              <span class="post-section__meta-value">{format(entry.data.edited_at, "PPP", { locale: ko })}</span>
+            </span>
+          )
+        }
+        {
+          entry.data.created_at && (
+            <span class="post-section__meta">
+              <span class="post-section__meta-name">작성일</span>
+              <span class="post-section__meta-value">{format(entry.data.created_at, "PPP", { locale: ko })}</span>
+            </span>
+          )
+        }
+      </div>
+    </header>
+    <article class="post-body markdown-body">
+      <div class="container">
+        <Content />
+      </div>
+    </article>
+  </section>
+</ScaffoldLayout>
+
+<style lang="scss">
+  @use "/src/styles/color" as color;
+
+  :root {
+    --html-bg: #{color.neutral(1)} !important;
+  }
+
+  .post-section {
+    &__header {
+      position: relative;
+      padding: {
+        top: 4rem;
+        bottom: 3rem;
+      }
+      border-bottom: 1px solid color.primary(6);
+      color: color.primary(12);
+    }
+
+    &__title {
+      font-weight: bold;
+      font-size: 2rem;
+      line-height: 2.25rem;
+    }
+
+    &__subtitle {
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.5rem;
+      margin-top: 0.5rem;
+      color: color.primary(11);
+    }
+
+    &__meta-container {
+      position: absolute;
+      bottom: 0;
+      line-height: 1.5rem;
+      font-size: 0.875rem;
+      padding: 0.5rem 0;
+    }
+
+    &__meta {
+      & + & {
+        margin-left: 0.5rem;
+      }
+    }
+
+    &__meta-name {
+      font-weight: 600;
+      color: color.primary(11);
+    }
+
+    &__meta-value {
+      color: color.primary(12);
+    }
+  }
+
+  .post-body {
+    padding: {
+      top: 4rem;
+      bottom: 4rem;
+    }
+  }
+</style>
