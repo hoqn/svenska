@@ -1,0 +1,111 @@
+@use "sass:selector" as selector;
+@use "/src/styles/color" as color;
+
+.button {
+  border: none;
+  transition: 0.1s linear;
+}
+
+@each $tint in ("primary", "neutral") {
+  .button--contained.button--#{$tint} {
+    background-color: color.get-color($tint, 9);
+    color: color.get-color($tint, 1);
+    outline: 1px solid color.get-color($tint, 10);
+    border-radius: 0.25rem;
+
+    &:hover {
+      background-color: color.get-color($tint, 10);
+      color: color.get-color($tint, 1);
+      outline: 1px solid color.get-color($tint, 10);
+    }
+    &:active {
+      background-color: color.get-color($tint, 10);
+      color: color.get-color($tint, 1);
+      outline: 1px solid color.get-color($tint, 10);
+    }
+    &:focus {
+      outline: 1px solid color.get-color($tint, 8);
+    }
+  }
+
+  .button--tonal.button--#{$tint} {
+    background-color: color.get-color($tint, 3);
+    color: color.get-color($tint, 12);
+    outline: 1px solid color.get-color($tint, 7);
+    border-radius: 0.25rem;
+
+    &:hover {
+      background-color: color.get-color($tint, 4);
+      color: color.get-color($tint, 12);
+      outline: 1px solid color.get-color($tint, 8);
+    }
+    &:active {
+      background-color: color.get-color($tint, 5);
+      color: color.get-color($tint, 12);
+      outline: 1px solid color.get-color($tint, 8);
+    }
+    &:focus {
+      outline: 1px solid color.get-color($tint, 8);
+    }
+  }
+
+  .button--text.button--#{$tint} {
+    background-color: transparent;
+    color: color.get-color($tint, 11);
+    outline: 1px solid transparent;
+    border-radius: 0.25rem;
+
+    &:hover {
+      background-color: color.get-color($tint, 4);
+      color: color.get-color($tint, 12);
+    }
+    &:active {
+      background-color: color.get-color($tint, 5);
+      color: color.get-color($tint, 12);
+    }
+    &:focus {
+      outline: 1px solid color.get-color($tint, 8);
+    }
+  }
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  //
+  color: var(--local-fg);
+  background-color: var(--local-bg);
+  padding: 0.375rem 1rem;
+
+  cursor: pointer;
+}
+
+.button,
+.button__label {
+  display: inline;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+
+.button__icon {
+  line-height: 1.25rem;
+  height: 1.25rem;
+
+  &--start {
+    margin-left: -0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  &--end {
+    margin-left: 0.5rem;
+    margin-right: -0.5rem;
+  }
+
+  &--center {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+}
