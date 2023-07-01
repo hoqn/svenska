@@ -24,3 +24,9 @@ $breakpoints: (
     @content;
   }
 }
+
+@mixin dark-only {
+  @at-root :global(.dark-theme) & {
+    @content;
+  }
+}

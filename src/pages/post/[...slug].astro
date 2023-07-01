@@ -25,7 +25,9 @@ const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 ---
 
-<ScaffoldLayout>
+<ScaffoldLayout meta={{
+  themeColor: undefined
+}}>
   <!-- POST CONTENT SECTION -->
   <section class="post-section">
     <header class="post-section__header container">

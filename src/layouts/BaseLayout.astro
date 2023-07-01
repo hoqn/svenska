@@ -16,7 +16,7 @@ const { lang, meta: partialMeta } = Astro.props;
 const meta: SiteMeta = {
   ...defaultSiteMeta,
   ...partialMeta,
-}
+};
 ---
 
 {/* SWUP */}
@@ -48,6 +48,14 @@ const meta: SiteMeta = {
     <meta name="description" content={meta.desc} />
     <meta name="theme-color" content={meta.themeColor} />
     <title>{meta.title}</title>
+    <script is:inline>
+      (() => {
+        var v = localStorage.getItem("color-scheme");
+        if (v === "dark" || (v === null && window.matchMedia("prefers-color-scheme: dark").matches)) {
+          document.documentElement.classList.add("dark-theme");
+        }
+      })();
+    </script>
   </head>
   <body>
     <slot />

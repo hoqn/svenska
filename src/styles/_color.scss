@@ -1,14 +1,18 @@
-$primary-color-name: grass;
-$neutral-color-name: olive;
+@use "sass:map" as map;
+
+$raw-colors: (
+  "primary": grass,
+  "neutral": olive,
+);
 
 @function get-color($name, $scale) {
-  @return var(--#{$name}#{$scale});
+  @return var(--#{map.get($raw-colors, $name)}#{$scale});
 }
 
 @function primary($scale) {
-  @return get-color($primary-color-name, $scale);
+  @return get-color("primary", $scale);
 }
 
 @function neutral($scale) {
-  @return get-color($neutral-color-name, $scale);
+  @return get-color("neutral", $scale);
 }

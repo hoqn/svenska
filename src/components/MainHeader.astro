@@ -3,6 +3,7 @@ import { t } from "i18next";
 import { localizePath } from "astro-i18next";
 import { LanguageSelector } from "astro-i18next/components";
 import { staticI18n } from "@/core/i18n";
+import ColorSchemeButton from "./ColorSchemeButton";
 
 const locale = staticI18n(Astro.url.pathname);
 
@@ -10,7 +11,7 @@ const menuItems: { label: string; href: string }[] = [
   { label: t("navigation.posts"), href: localizePath("/post", locale) },
   { label: t("navigation.about"), href: localizePath("/about", locale) },
   { label: t("navigation.works"), href: localizePath("/works", locale) },
-  { label: t("navigation.contact"), href: localizePath("/contact", locale) },
+  // { label: t("navigation.contact"), href: localizePath("/contact", locale) },
 ];
 ---
 
@@ -19,6 +20,7 @@ const menuItems: { label: string; href: string }[] = [
     <input type="checkbox" id="menu-handle" class="menu-handle__input" hidden />
     {/* Floating */}
     <div class="floating-content container">
+      <ColorSchemeButton client:load />
       <label
         for="menu-handle"
         class="menu-handle pressable pressable--opacity"
@@ -105,6 +107,7 @@ const menuItems: { label: string; href: string }[] = [
 
     .floating-content {
       position: absolute;
+      z-index: 10;
       right: 0;
       top: 0;
       height: var(--header-height);
@@ -113,10 +116,15 @@ const menuItems: { label: string; href: string }[] = [
       justify-content: flex-end;
       align-items: center;
       min-width: 0px;
+
+      & > * + * {
+        margin-left: 1rem;
+      }
     }
 
     .fixed-content {
       display: block;
+      z-index: 5;
       height: 0px;
       min-height: var(--header-height);
       @include media.lg {
@@ -133,6 +141,7 @@ const menuItems: { label: string; href: string }[] = [
     }
 
     .aux-content {
+      z-index: 0;
       max-height: 0;
       overflow-y: hidden;
       position: relative;

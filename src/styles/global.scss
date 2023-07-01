@@ -20,15 +20,21 @@ $container-max-width: 52rem !default;
 @import "@radix-ui/colors/olive.css";
 @import "@radix-ui/colors/oliveDark.css";
 
+.dark-theme {
+  color-scheme: dark;
+}
+
 // Global
 
 :root {
   --html-bg: #{color.primary(2)};
+  --html-fg: #{color.primary(12)};
 }
 
 html {
   transition: background-color 0.2s ease-in;
   background-color: var(--html-bg);
+  color: var(--html-fg);
 }
 
 ::selection {

@@ -1,0 +1,12 @@
+@use "/src/styles/media" as media;
+
+.color-scheme-btn {
+  &::before {
+    content: attr(data-text-light);
+  }
+  @include media.dark-only {
+    &::before {
+      content: attr(data-text-dark);
+    }
+  }
+}
