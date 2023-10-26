@@ -1,8 +1,15 @@
 {
-  "navigation": {
-    "posts": "블로그",
-    "about": "저에 대해",
-    "works": "프로젝트",
-    "contact": "연락처"
-  }
+  "navigation.menu.posts": "블로그",
+  "navigation.menu.about": "저에 대해",
+  "navigation.menu.works": "프로젝트",
+  "navigation.menu.contact": "연락처",
+  "navigation.hamburger.open": "메뉴",
+  "navigation.hamburger.close": "닫기",
+
+  "app.colorscheme.light": "밝음",
+  "app.colorscheme.dark": "어두움",
+
+  "posts.list.all": "모든 글",
+  "posts.item.created": "{{date, datetime}}에 작성됨",
+  "posts.item.edited": "{{date, datetime}}에 수정됨"
 }

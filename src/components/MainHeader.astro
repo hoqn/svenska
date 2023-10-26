@@ -1,5 +1,6 @@
 ---
 import { t } from "i18next";
+//@ts-ignore
 import { localizePath } from "astro-i18next";
 import { LanguageSelector } from "astro-i18next/components";
 import { staticI18n } from "@/core/i18n";
@@ -8,10 +9,9 @@ import ColorSchemeButton from "./ColorSchemeButton";
 const locale = staticI18n(Astro.url.pathname);
 
 const menuItems: { label: string; href: string }[] = [
-  { label: t("navigation.posts"), href: localizePath("/post", locale) },
-  { label: t("navigation.about"), href: localizePath("/about", locale) },
-  { label: t("navigation.works"), href: localizePath("/works", locale) },
-  // { label: t("navigation.contact"), href: localizePath("/contact", locale) },
+  { label: t("navigation.menu.posts"), href: localizePath("/post", locale) },
+  { label: t("navigation.menu.about"), href: localizePath("/about", locale) },
+  { label: t("navigation.menu.works"), href: localizePath("/works", locale) },
 ];
 ---
 
@@ -20,13 +20,13 @@ const menuItems: { label: string; href: string }[] = [
     <input type="checkbox" id="menu-handle" class="menu-handle__input" hidden />
     {/* Floating */}
     <div class="floating-content container">
-      <ColorSchemeButton client:load />
+      <ColorSchemeButton client:only="react" />
       <label
         for="menu-handle"
         class="menu-handle pressable pressable--opacity"
-        data-s-open="메뉴"
-        data-s-close="닫기"
-        aria-label="메뉴"
+        data-s-open={t("navigation.hamburger.open")}
+        data-s-close={t("navigation.hamburger.close")}
+        aria-label={t("navigation.hamburger.open")}
       >
         <i class="menu-handle__icon"></i>
       </label>

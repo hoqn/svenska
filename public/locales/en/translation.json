@@ -1,8 +1,15 @@
 {
-  "navigation": {
-    "posts": "Posts",
-    "about": "About me",
-    "works": "Works",
-    "contact": "Contacts"
-  }
+  "navigation.menu.posts": "Posts",
+  "navigation.menu.about": "About Me",
+  "navigation.menu.works": "My Works",
+  "navigation.menu.contact": "Contact",
+  "navigation.hamburger.open": "Open Menu",
+  "navigation.hamburger.close": "Close Menu",
+  
+  "app.colorscheme.light": "Light",
+  "app.colorscheme.dark": "Dark",
+
+  "posts.list.all": "All Posts",
+  "posts.item.created": "Created on {{date, datetime}}",
+  "posts.item.edited": "Edited on {{date, datetime}}"
 }

@@ -2,11 +2,14 @@
 @use "/src/styles/color" as color;
 
 .list-item {
-  composes: pressable pressable--opacity from global;
   position: relative;
   display: block;
   //
   color: color.primary(12);
+}
+
+.list-item__link {
+  composes: pressable pressable--opacity from global;
 }
 
 .list-item__inner {
@@ -54,6 +57,12 @@
 .list-item__tags {
   display: block;
   list-style: none;
+  margin-top: -.25rem;
+  font-size: .875rem;
+  font-weight: normal;
+  >*+* {
+    margin-left: .5rem;
+  }
 }
 
 .list-item__tag {
@@ -61,6 +70,7 @@
 }
 
 .list-item__tag-link {
+  composes: pressable pressable--opacity from global;
   display: inline;
   //
   &::before {

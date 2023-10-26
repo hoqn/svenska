@@ -15,7 +15,7 @@
     "@radix-ui/colors": "^0.1.8",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "astro": "^2.7.0",
+    "astro": "^3.3.4",
     "astro-i18n-aut": "link:..\\astro-i18n-aut",
     "astro-i18next": "1.0.0-beta.21",
     "date-fns": "^2.30.0",

@@ -35,7 +35,7 @@ const currentShowType = showTypes.filter((cu) => cu.key === currentTypeCode).pop
   {/* Post List */}
   <section class="post-list-section container">
     <div class="post-list-section__body">
-      <PostList {posts} />
+      <PostList {posts} client:load />
     </div>
   </section>
 </ScaffoldLayout>
