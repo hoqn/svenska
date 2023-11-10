@@ -1,5 +1,5 @@
-@use "/src/styles/media" as media;
-@use "/src/styles/color" as color;
+@use "media";
+@use "color";
 
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css");
 
@@ -67,8 +67,10 @@ a {
   &--opacity {
     transition: .1s ease-in-out;
     opacity: 1;
-    &:hover {
-      opacity: .6;
+    @media screen and (hover: hover) {
+      &:hover {
+        opacity: .6;
+      }
     }
     &:active {
       opacity: .25;
@@ -118,5 +120,13 @@ html.is-changing {
 
   em {
     font-style: italic;
+  }
+
+  img {
+    max-height: 24rem;
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

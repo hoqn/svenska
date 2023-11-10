@@ -20,6 +20,13 @@ export default defineConfig({
   srcDir: "./src",
   vite: {
     plugins: [yaml()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          includePaths: ["./src/styles"],
+        }
+      },
+    },
   },
   trailingSlash: "never",
   build: {
