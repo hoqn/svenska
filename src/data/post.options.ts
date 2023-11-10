@@ -1,21 +1,22 @@
-export type ShowType = {
+export interface ShowTypeRaw {
   display: string;
   key: string;
   indexHref?: string;
 };
+export type ShowType = typeof postOptions["showTypes"][number];
 
-export default {
+const postOptions = {
   showTypes: [
     {
       display: "모든 글",
       key: "post",
       indexHref: "/post"
     },
-    {
-      display: "카테고리",
-      key: "category",
-      indexHref: "/category",
-    },
+    // {
+    //   display: "카테고리",
+    //   key: "category",
+    //   indexHref: "/category",
+    // },
     {
       display: "시리즈",
       key: "series",
@@ -26,7 +27,9 @@ export default {
       key: "tag",
       indexHref: "/tag",
     },
-  ]
-} satisfies {
-  showTypes: ShowType[];
-};
+  ],
+} as const satisfies {
+  showTypes: readonly ShowTypeRaw[];
+} ;
+
+export default postOptions;

@@ -1,0 +1,28 @@
+---
+import type { GetStaticPaths } from "astro";
+import PostArticleLayout from "@/layouts/PostArticleLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export const getStaticPaths: GetStaticPaths = async function () {
+  const works = await getCollection("works");
+  return works.map(work => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+};
+
+export interface Props {
+  work: CollectionEntry<"works">;
+}
+
+const { work } = Astro.props;
+const { Content, headings } = await work.render();
+---
+
+<PostArticleLayout header={{
+  title: work.data.title,
+  subtitle: `${work.data.start_date ?? ""} — ${work.data.end_date ?? ""}`,
+  icon: work.data.icon,
+}}>
+  <Content />
+</PostArticleLayout>

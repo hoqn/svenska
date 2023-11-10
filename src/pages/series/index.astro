@@ -1,0 +1,58 @@
+---
+import ListScaffoldLayout from "@/layouts/ListScaffoldLayout.astro";
+import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
+import { getCollection } from "astro:content";
+
+const serieses = await getCollection("serieses");
+const postsInSeries = await getCollection("posts", ({ data }) => !!data.series);
+
+let counts = serieses.reduce((ac, { slug }) => ({...ac, [slug]: 0}), {}) as Record<typeof serieses[number]['slug'], number>;
+postsInSeries.forEach(({ data: { series } }) => {
+  if (series?.slug)
+    counts[series.slug] ++;
+});
+---
+
+<ListScaffoldLayout currentShowType="series">
+  <ul class="series-list">
+    {serieses.map((series) => (
+      <li class="series-list__item">
+        <a class="pressable pressable--opacity" href={`/series/${series.slug}`}>
+          <div class="series-list__title">
+            {series.data.title}
+            <span class="series-list__counts">({counts[series.slug]}개의 글)</span>
+          </div>
+          </a>
+      </li>
+    ))}
+  </ul>
+</ListScaffoldLayout>
+
+<style lang="scss">
+  @use "color";
+
+  .series-list {
+    display: block;
+  }
+  .series-list__item {
+    display: block;
+    padding: 1rem 0;
+    >a {
+      display: block;
+    }
+
+    & + & {
+      border-top: 1px solid color.primary(6);
+    }
+  }
+
+  .series-list__title {
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+  .series-list__counts {
+    margin-left: 1rem;
+    font-weight: normal;
+    font-size: .875rem;
+  }
+</style>

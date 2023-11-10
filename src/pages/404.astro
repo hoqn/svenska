@@ -9,9 +9,18 @@ import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
       <h1 class="content__title">404</h1>
       <h4 class="content__subtitle">이런!</h1>
       <p class="content__desc">없는 페이지예요. 주소를 다시 확인해주세요.</p>
+      <p>
+        <a id="goback-btn" onclick="window.history.back();" class="content__goback pressable pressable--opacity">이전 페이지로 돌아가기</a>
+      </p>
     </div>
   </div>
 </ScaffoldLayout>
+
+<!-- <script>
+  document.getElementById("goback-btn")?.addEventListener("click", (e) => {
+    window.history.back();
+  });
+</script> -->
 
 <style lang="scss">
   @use "../styles/color" as color;
@@ -44,6 +53,18 @@ import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
       margin-top: 2.5rem;
       font-size: 1rem;
       font-weight: normal;
+    }
+
+    &__goback {
+      display: inline-block;
+      padding: .5rem;
+      margin-top: 1rem;
+      color: color.primary(11);
+
+      &::before {
+        content: "\F044";
+        margin-right: .5rem;
+      }
     }
   }
 </style>

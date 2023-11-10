@@ -1,0 +1,182 @@
+---
+import { format } from "date-fns";
+import { ko } from "date-fns/locale";
+import ScaffoldLayout from "./ScaffoldLayout.astro";
+import { Image } from "astro:assets";
+
+export interface Props {
+  header?: {
+    title: string;
+    subtitle?: string | null;
+    edited_at?: Date | null;
+    created_at?: Date | null;
+    tags?: string[] | null;
+    icon?: string | object | null;
+  },
+}
+
+const {
+  header,
+} = Astro.props;
+---
+
+<ScaffoldLayout meta={{
+  themeColor: undefined
+}}>
+  <section class="post-section">
+    <slot name="header-wrapper">
+
+      <header class="post-section__header container">
+        <slot name="header">
+
+          {header?.icon &&
+          <div class="post-section__header-icon">
+            {
+              typeof header.icon === "string"
+              ? <div>{header.icon}</div>
+              : <Image src={header.icon as any} alt="글 아이콘" width="72" height="72" />
+            }
+             </div>
+            }
+
+        <h2 class="post-section__title">{header?.title}</h2>
+        {header?.subtitle && <h4 class="post-section__subtitle">{header?.subtitle}</h4>}
+
+        {header?.tags?.length &&
+          <ul class="post-section__tags">
+            {header.tags.map((tag) => (
+
+              <li class="post-section__tag"><a href={`/tag/${tag}`}>{tag}</a></li>
+              ))
+            }
+            </ul>
+          }
+
+        <div class="post-section__meta-container">
+        {
+          header?.edited_at && (
+            <span class="post-section__meta">
+              <span class="post-section__meta-name">수정일</span>
+              <span class="post-section__meta-value">{format(header?.edited_at, "PPP", { locale: ko })}</span>
+            </span>
+          )
+        }
+        {
+          header?.created_at && (
+            <span class="post-section__meta">
+              <span class="post-section__meta-name">작성일</span>
+              <span class="post-section__meta-value">{format(header?.created_at, "PPP", { locale: ko })}</span>
+              </span>
+              )
+            }
+      </div>
+    </slot>
+  </slot>
+    </header>
+    <slot name="body-wrapper">
+
+      <article class="post-body markdown-body">
+        <div class="container">
+          <slot />
+        </div>
+      </article>
+    </slot>
+  </section>
+</ScaffoldLayout>
+
+<style lang="scss">
+  @use "color";
+
+  :root {
+    --html-bg: #{color.neutral(1)} !important;
+  }
+
+  .post-section {
+    &__header {
+      position: relative;
+      padding: {
+        top: 4rem;
+        bottom: 3rem;
+      }
+      border-bottom: 1px solid color.primary(6);
+      color: color.primary(12);
+    }
+
+    &__header-icon {
+      font-size: 4rem;
+      line-height: 4.5rem;
+      margin-bottom: 1rem;
+    }
+
+    &__title {
+      font-weight: bold;
+      font-size: 2rem;
+      line-height: 2.25rem;
+    }
+
+    &__subtitle {
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.5rem;
+      margin-top: 0.5rem;
+      color: color.primary(11);
+    }
+
+    &__tags {
+      display: block;
+      padding: 1rem 0;
+    }
+
+    &__tag {
+      display: inline;
+      color: color.neutral(11);
+
+      & + & {
+        margin-left: .5rem;
+      }
+
+      > a {
+        &::before {
+          content: "\0023";
+          margin-right: .25rem;
+        }
+      }
+    }
+
+    &__meta-container {
+      position: absolute;
+      bottom: 0;
+      line-height: 1.5rem;
+      font-size: 0.875rem;
+      padding: 0.5rem 0;
+    }
+
+    &__meta {
+      & + & {
+        margin-left: 0.5rem;
+      }
+    }
+
+    &__meta-name {
+      font-weight: 600;
+      color: color.primary(11);
+      margin-right: .5rem;
+    }
+
+    &__meta-value {
+      color: color.primary(12);
+    }
+  }
+
+  .post-body {
+    padding: {
+      top: 4rem;
+      bottom: 4rem;
+    }
+
+  }
+  .post-body img {
+    object-fit: contain !important;
+    max-height: 24rem !important;
+  }
+</style>

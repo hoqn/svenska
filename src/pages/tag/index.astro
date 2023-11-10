@@ -1,0 +1,43 @@
+---
+import ListScaffoldLayout from "@/layouts/ListScaffoldLayout.astro";
+import { getPostTagCollection } from "@/utils/collection-tags";
+
+const tags = await getPostTagCollection();
+---
+
+<ListScaffoldLayout currentShowType="tag">
+  <ul class="tag-list">
+    {tags.map((tag) => (
+      <li class="tag-list__item">
+        <a class="pressable pressable--opacity" href={`/tag/${tag}`}>{tag}</a>
+      </li>
+    ))}
+  </ul>
+</ListScaffoldLayout>
+
+<style lang="scss">
+  @use "color";
+  @use "mixin";
+
+  .tag-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    padding: 1rem 0;
+  }
+
+  .tag-list__item {
+    > a {
+      display: inline-block;
+      padding: .5rem;
+      color: color.primary(12);
+      text-decoration: underline solid .25rem color.neutral(5);
+
+      &::before {
+        content: "\0023";
+      }
+    }
+  }
+</style>

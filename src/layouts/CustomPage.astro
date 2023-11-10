@@ -26,9 +26,11 @@ const {
   </header>
   <article class="page-body">
     <div class="container">
+      <slot name="markdown-body::before" />
       <div class="markdown-body">
         <slot />
       </div>
+      <slot name="markdown-body::after" />
     </div>
   </article>
 </ScaffoldLayout>

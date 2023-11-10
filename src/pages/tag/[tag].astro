@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content";
+import format from 'date-fns/format/index';
+import ko from 'date-fns/locale/ko/index';
+import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
+
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getPostTagCollection } from "@/utils/collection-tags";
+import ListScaffoldLayout from "@/layouts/ListScaffoldLayout.astro";
+import PostList from "@/components/post/post-list.astro";
+
+export const getStaticPaths: GetStaticPaths = async function () {
+  const tags = await getPostTagCollection();
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag }
+  }));
+};
+
+export interface Props {
+  tag: string;
+}
+
+const { tag } = Astro.props;
+
+const posts = await getCollection("posts", ({ data: { tags } }) => (!!tags && tags.length) && tags.includes(tag) );
+---
+
+<ListScaffoldLayout currentShowType="tag">
+  <Fragment slot="header-title">#{tag}</Fragment>
+  <PostList {posts} />
+</ListScaffoldLayout>
+

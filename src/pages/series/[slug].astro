@@ -1,0 +1,57 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import type { GetStaticPaths } from "astro";
+import ListScaffoldLayout from "@/layouts/ListScaffoldLayout.astro";
+import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
+import CustomPage from "@/layouts/CustomPage.astro";
+import PostList from "@/components/post/post-list.astro";
+
+export const getStaticPaths: GetStaticPaths = async function () {
+  const serieses = await getCollection("serieses");
+  return serieses.map((series) => ({
+    params: { slug: series.slug },
+    props: { series },
+  }));
+};
+
+export interface Props {
+  series: CollectionEntry<"serieses">;
+}
+
+const { series } = Astro.props;
+const { Content, headings } = await series.render();
+
+const posts = await getCollection("posts", ({ data }) => data.series?.slug === series.slug);
+---
+
+<!-- <ListScaffoldLayout currentShowType="series">
+  <Fragment slot="header-title">{series.data.title}</Fragment>
+</ListScaffoldLayout> -->
+
+<CustomPage frontmatter={{ title: series.data.title, subtitle: "시리즈" }}>
+  <div class="series-body">
+    <Content />
+  </div>
+  <div class="post-list" slot="markdown-body::after">
+    <h4 class="post-list__heading">시리즈에 포함된 글</h4>
+    <PostList {posts} />
+  </div>
+</CustomPage>
+
+<style lang="scss">
+  @use "color";
+  
+  .series-body {
+    border-bottom: 1px solid color.primary(6);
+  }
+  .post-list {
+    margin-top: 1rem;
+  }
+  .post-list__heading {
+    font-size: 1.125rem;
+    font-weight: bold;
+    text-align: center;
+    color: color.primary(11);
+  }
+</style>

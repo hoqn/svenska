@@ -1,11 +1,13 @@
 ---
 import ScaffoldLayout from './ScaffoldLayout.astro';
-import PostList from '@/components/post/PostList';
-import PostTypes from '@/components/post/PostTypes';
+// import PostList from '@/components/post/PostList';
+import PostList from '@/components/post/post-list.astro';
+import PostTypes from '@/components/post/post-types.astro';
 
 import PostOptions from "@/data/post.options";
 
 import type { CollectionEntry } from "astro:content";
+import ListScaffoldLayout from './ListScaffoldLayout.astro';
 
 const { showTypes } = PostOptions;
 
@@ -15,50 +17,8 @@ export interface Props {
 }
 
 const { currentShowType: currentTypeCode, posts } = Astro.props;
-
-const currentShowType = showTypes.filter((cu) => cu.key === currentTypeCode).pop();
 ---
 
-<ScaffoldLayout>
-  {/* Local Header */}
-  <header class="page-header container">
-    <h2 class="page-header__title">
-      {currentShowType?.display}
-    </h2>
-  </header>
-  {/* Post Filter Options */}
-  <!-- <section class="post-types-section container">
-    <div class="post-types-section__body">
-      <PostTypes types={showTypes.filter(({ key }) => currentTypeCode !== key)} />
-    </div>
-  </section> -->
-  {/* Post List */}
-  <section class="post-list-section container">
-    <div class="post-list-section__body">
-      <PostList {posts} client:load />
-    </div>
-  </section>
-</ScaffoldLayout>
-
-<style lang="scss">
-  @use "/src/styles/color" as color;
-
-  .page-header {
-    padding-top: 2rem;
-    padding-bottom: 1rem;
-  }
-
-  .page-header__title {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    line-height: 2rem;
-  }
-
-  .post-list-section {
-    padding-bottom: 8rem;
-
-    &__body {
-    }
-  }
-</style>
+<ListScaffoldLayout currentShowType="post">
+  <PostList {posts}/>
+</ListScaffoldLayout>
