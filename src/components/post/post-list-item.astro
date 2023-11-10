@@ -1,0 +1,129 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import { t } from "i18next";
+
+export interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post: { data, slug } } = Astro.props;
+const createdAt = data.created_at && format(data.created_at, "PPP", { locale: ko });
+const editedAt = data.edited_at && format(data.edited_at, "PPP", { locale: ko });
+---
+
+<div class="list-item">
+  <a href={`/post/${slug}`} class="list-item__inner pressable pressable--opacity">
+    <!-- A -->
+    <h3 class="list-item__title">{data.title}</h3>
+    {data.subtitle && <h5 class="list-item__subtitle">{data.subtitle}</h5>}
+    </a>
+  {data.tags?.length && (
+    <ul class="list-item__tags">
+      {data.tags.map((tag) => (
+        <li class="list-item__tag">
+          <a class="list-item__tag-link pressable pressable--opacity" href={`/tag/${tag}`}>
+            {tag}
+            </a>
+            </li>
+            ))}
+            </ul>
+            )}
+            <div class="list-item__meta">
+              {createdAt && (
+                <span class="list-item__date list-item__date--created">
+                  {t("posts.item.created", { date: data.created_at })}
+                  </span>
+                  )}
+              {editedAt && (
+                <span class="list-item__date list-item__date--created">
+                  {t("posts.item.edited", { date: data.edited_at })}
+                  </span>
+                  )}
+            </div>
+</div>
+
+<style lang="scss">
+  @use "media";
+  @use "color";
+
+  .list-item {
+    position: relative;
+    display: block;
+    color: color.primary(12);
+  }
+
+  .list-item__inner {
+    display: block;
+    padding: 1rem 0;
+  }
+
+  .list-item__title {
+    color: color.neutral(12);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.list-item__subtitle {
+  color: color.neutral(11);
+  margin-top: .5rem;
+  //
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.25rem;
+  //
+  &::before {
+    content: "\2014";
+    padding-right: .5rem;
+  }
+}
+
+.list-item__meta {
+  margin: .5rem 0;
+  //
+  font-size: .875rem;
+  font-weight: normal;
+  line-height: 1rem;
+  //
+  color: color.primary(11);
+  opacity: .8;
+
+  text-align: right;
+}
+
+.list-item__date {
+  & + &::before {
+    content: "\00B7";
+    padding: 0 .5rem;
+  }
+}
+
+.list-item__tags {
+  position: relative;
+  display: block;
+  list-style: none;
+  font-size: .875rem;
+  font-weight: normal;
+  color: color.neutral(11);
+
+  >*+* {
+    margin-left: .5rem;
+  }
+}
+
+.list-item__tag {
+  display: inline;
+}
+
+.list-item__tag-link {
+  composes: pressable pressable--opacity from global;
+  display: inline;
+
+    &::before {
+      content: "#";
+      display: inline;
+    }
+  }
+</style>

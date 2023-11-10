@@ -4,7 +4,7 @@ import { t } from "i18next";
 import { localizePath } from "astro-i18next";
 import { LanguageSelector } from "astro-i18next/components";
 import { staticI18n } from "@/core/i18n";
-import ColorSchemeButton from "./ColorSchemeButton";
+import ColorSchemeButton from "./color-scheme-button.astro";
 
 const locale = staticI18n(Astro.url.pathname);
 
@@ -13,6 +13,8 @@ const menuItems: { label: string; href: string }[] = [
   { label: t("navigation.menu.about"), href: localizePath("/about", locale) },
   { label: t("navigation.menu.works"), href: localizePath("/works", locale) },
 ];
+
+const pathname = Astro.url.pathname;
 ---
 
 <header class="main-header">
@@ -20,7 +22,8 @@ const menuItems: { label: string; href: string }[] = [
     <input type="checkbox" id="menu-handle" class="menu-handle__input" hidden />
     {/* Floating */}
     <div class="floating-content container">
-      <ColorSchemeButton client:only="react" />
+      <!-- <ColorSchemeButton client:only="react" /> -->
+      <ColorSchemeButton />
       <label
         for="menu-handle"
         class="menu-handle pressable pressable--opacity"

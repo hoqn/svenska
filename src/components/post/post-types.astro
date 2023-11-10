@@ -1,0 +1,57 @@
+---
+import PostOptions, { type ShowType } from '@/data/post.options';
+
+const { showTypes } = PostOptions;
+
+export interface Props {
+  activeKey?: ShowType["key"];
+}
+
+const { activeKey } = Astro.props;
+---
+
+<ul class="post-types">
+  {
+    showTypes.map(({ display, indexHref, key }) => (
+      <li class:list={["post-types__item", key === activeKey && "post-types__item--active"]}>
+        <a class="pressable pressable--opacity" href={indexHref}>{display}</a>
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="scss">
+  @use "media";
+  @use "color";
+
+  .post-types {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+
+  .post-types__item {
+    flex-shrink: 1;
+    border-radius: 8px;
+
+    text-align: center;
+    
+    > a {
+      display: block;
+      padding: 0.5rem 1rem;
+      //
+      // border: 1px solid color.primary(7);
+      background-color: color.primary(3);
+      border-radius: 8px;
+    }
+
+    &--active > a {
+      background-color: color.primary(5);
+    }
+  }
+
+</style>

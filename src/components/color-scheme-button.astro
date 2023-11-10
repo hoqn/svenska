@@ -1,0 +1,60 @@
+---
+import { t } from "i18next";
+import Button from "./ui/button/button.astro";
+---
+
+<Button variant="text" tint="primary" id="color-scheme-btn" class="color-scheme-btn">
+  <span class="color-scheme-btn__label--light">{t("app.colorscheme.light")}</span>
+  <span class="color-scheme-btn__label--dark">{t("app.colorscheme.dark")}</span>
+</Button>
+
+<script>
+  const button = document.getElementById("color-scheme-btn");
+  
+  button?.addEventListener("click", function(e) {
+    e.preventDefault();
+    if (window.localStorage) {
+      let value = document.documentElement.classList.contains("dark-theme") ? "light" : "dark";
+
+      window.localStorage.setItem("color-scheme", value);
+
+      // let current = window.localStorage.getItem("color-scheme");
+      
+      // if (current === null)
+      //   current = window.matchMedia("prefers-color-scheme: dark").matches ? "dark" : "light";
+
+      if (value === "dark")
+        document.documentElement.classList.add("dark-theme");
+      else
+        document.documentElement.classList.remove("dark-theme");
+    }
+  });
+</script>
+
+<style lang="scss">
+  @use "media";
+
+  .color-scheme-btn {
+    &::before {
+      content: attr(data-text-light);
+    }
+    @include media.dark-only {
+      &::before {
+        content: attr(data-text-dark);
+      }
+    }
+  }
+
+  .color-scheme-btn__label--light {
+    display: inline;
+    @include media.dark-only {
+      display: none;
+    }
+  }
+  .color-scheme-btn__label--dark {
+    display: none;
+    @include media.dark-only {
+      display: inline;
+    }
+  }
+</style>
