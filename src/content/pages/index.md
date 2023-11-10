@@ -3,6 +3,7 @@ name: 전호균
 hero:
   title: "안녕하세요! 👋<br/>I am Hogyun Jeon."
 links:
+  "저에 대해": "/about"
   깃허브: https://github.com/hoqn
   블로그: "/post"
 ---
