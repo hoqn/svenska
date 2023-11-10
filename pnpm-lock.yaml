@@ -23,9 +23,6 @@ dependencies:
   astro:
     specifier: ^3.3.4
     version: 3.3.4(sass@1.63.5)
-  astro-i18n-aut:
-    specifier: link:..\astro-i18n-aut
-    version: link:../astro-i18n-aut
   astro-i18next:
     specifier: 1.0.0-beta.21
     version: 1.0.0-beta.21(astro@3.3.4)

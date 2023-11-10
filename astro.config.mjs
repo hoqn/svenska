@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import yaml from "@rollup/plugin-yaml";
 
 import react from "@astrojs/react";
-import i18nRouting from "astro-i18n-aut";
+// import i18nRouting from "astro-i18n-aut";
 import i18next from "astro-i18next";
 import sitemap from "@astrojs/sitemap";
 
@@ -34,10 +34,10 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    i18nRouting({
-      locales,
-      defaultLocale,
-    }),
+    // i18nRouting({
+    //   locales,
+    //   defaultLocale,
+    // }),
     sitemap({
       i18n: {
         locales,
