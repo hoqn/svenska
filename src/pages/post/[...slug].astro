@@ -26,7 +26,11 @@ const { Content, headings } = await entry.render();
 ---
 
 <PostArticleLayout header={{
-  ...entry.data
+  title: entry.data.title,
+  subtitle: entry.data.subtitle,
+  created_at: entry.data.created_at,
+  edited_at: entry.data.edited_at,
+  tags: entry.data.tags,
 }}>
   <Content />
 </PostArticleLayout>

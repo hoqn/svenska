@@ -21,7 +21,7 @@ dependencies:
     specifier: ^18.0.6
     version: 18.2.15
   astro:
-    specifier: ~3.3.4
+    specifier: 3.3.4
     version: 3.3.4(sass@1.69.5)(typescript@5.2.2)
   astro-i18next:
     specifier: 1.0.0-beta.21
