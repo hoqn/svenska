@@ -64,10 +64,22 @@ const pathname = Astro.url.pathname;
     /> -->
 </header>
 
+<script>
+  const menuHandle= document.getElementById("menu-handle") as HTMLInputElement | null;
+
+  const handleClickMenuItem = function () {
+    if (menuHandle)
+      menuHandle.checked = false;
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>(".menu__item>a")
+    .forEach((element) => element.addEventListener("click", handleClickMenuItem));
+</script>
+
 <style lang="scss">
-  @use "/src/styles/media" as media;
-  @use "/src/styles/color" as color;
-  @use "sass:selector" as selector;
+  @use "media";
+  @use "color";
+  @use "sass:selector";
 
   @mixin menu-opened($selector) {
     @at-root .menu-handle__input:checked ~ #{$selector} {
