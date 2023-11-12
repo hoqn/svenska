@@ -1,6 +1,7 @@
 ---
 title: "React Server Component에서 주소를 먼저 변경하는 트릭"
-created_at: 2023-06-21
+created_at: 2023-10-12
+draft: true
 ---
 
 그러니까 내가 원하는 것은 아래와 같았다.

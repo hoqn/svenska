@@ -1,6 +1,6 @@
 ---
 import { format } from "date-fns";
-import ko from 'date-fns/locale/ko/index.js';
+import ko from "date-fns/locale/ko/index.js";
 import ScaffoldLayout from "./ScaffoldLayout.astro";
 import { Image } from "astro:assets";
 
@@ -12,69 +12,83 @@ export interface Props {
     created_at?: Date | null;
     tags?: string[] | null;
     icon?: string | object | null;
-  },
+  };
 }
 
-const {
-  header,
-} = Astro.props;
+const { header } = Astro.props;
 ---
 
-<ScaffoldLayout meta={{
-  themeColor: undefined
-}}>
+<ScaffoldLayout
+  meta={{
+    themeColor: undefined,
+  }}
+>
   <section class="post-section">
     <slot name="header-wrapper">
-
       <header class="post-section__header container">
         <slot name="header">
-
-          {header?.icon &&
-          <div class="post-section__header-icon">
-            {
-              typeof header.icon === "string"
-              ? <div>{header.icon}</div>
-              : <Image src={header.icon as any} alt="글 아이콘" width="72" height="72" />
-            }
-             </div>
-            }
-
-        <h2 class="post-section__title">{header?.title}</h2>
-        {header?.subtitle && <h4 class="post-section__subtitle">{header?.subtitle}</h4>}
-
-        {header?.tags?.length &&
-          <ul class="post-section__tags">
-            {header.tags.map((tag) => (
-
-              <li class="post-section__tag"><a href={`/tag/${tag}`}>{tag}</a></li>
-              ))
-            }
-            </ul>
+          {
+            header?.icon && (
+              <div class="post-section__header-icon">
+                {typeof header.icon === "string" ? (
+                  <div>{header.icon}</div>
+                ) : (
+                  <Image
+                    src={header.icon as any}
+                    alt="글 아이콘"
+                    width="72"
+                    height="72"
+                  />
+                )}
+              </div>
+            )
           }
 
-        <div class="post-section__meta-container">
-        {
-          header?.edited_at && (
-            <span class="post-section__meta">
-              <span class="post-section__meta-name">수정일</span>
-              <span class="post-section__meta-value">{format(header?.edited_at, "PPP", { locale: ko })}</span>
-            </span>
-          )
-        }
-        {
-          header?.created_at && (
-            <span class="post-section__meta">
-              <span class="post-section__meta-name">작성일</span>
-              <span class="post-section__meta-value">{format(header?.created_at, "PPP", { locale: ko })}</span>
-              </span>
+          <h2 class="post-section__title">{header?.title}</h2>
+          {
+            header?.subtitle && (
+              <h4 class="post-section__subtitle">{header?.subtitle}</h4>
+            )
+          }
+
+          {
+            header?.tags?.length && (
+              <ul class="post-section__tags">
+                {header.tags.map((tag) => (
+                  <li class="post-section__tag">
+                    <a href={`/tag/${tag}`}>{tag}</a>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+
+          <div class="post-section__meta-container">
+            {
+              header?.edited_at && (
+                <span class="post-section__meta">
+                  <span class="post-section__meta-name">수정일</span>
+                  <span class="post-section__meta-value">
+                    {format(header?.edited_at, "PPP", { locale: ko })}
+                  </span>
+                </span>
               )
             }
-      </div>
+            {
+              header?.created_at && (
+                <span class="post-section__meta">
+                  <span class="post-section__meta-name">작성일</span>
+                  <span class="post-section__meta-value">
+                    {format(header?.created_at, "PPP", { locale: ko })}
+                  </span>
+                </span>
+              )
+            }
+          </div>
+        </slot>
+      </header>
     </slot>
-  </slot>
-    </header>
     <slot name="body-wrapper">
-
       <article class="post-body markdown-body">
         <div class="container">
           <slot />
@@ -132,13 +146,13 @@ const {
       color: color.neutral(11);
 
       & + & {
-        margin-left: .5rem;
+        margin-left: 0.5rem;
       }
 
       > a {
         &::before {
           content: "\0023";
-          margin-right: .25rem;
+          margin-right: 0.25rem;
         }
       }
     }
@@ -160,7 +174,7 @@ const {
     &__meta-name {
       font-weight: 600;
       color: color.primary(11);
-      margin-right: .5rem;
+      margin-right: 0.5rem;
     }
 
     &__meta-value {
@@ -173,7 +187,6 @@ const {
       top: 4rem;
       bottom: 4rem;
     }
-
   }
   .post-body img {
     object-fit: contain !important;

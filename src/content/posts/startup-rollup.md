@@ -1,15 +1,13 @@
 ---
-title: "CSS Modules에서 BEM 깔끔하게 사용하기"
-subtitle: "보다 구조적으로!"
-created_at: 2023-06-21
-edited_at: 2023-06-21
+title: "Rollup 시작하기"
+subtitle: "Startup Rollup"
+created_at: 2023-08-14
+draft: true
 ---
-
-# Rollup 시작하기
 
 Rollup, 많이 들어보았지만 감히 사용하지 못하고 있던 번들러이다. 하지만 라이브러리 배포 시 많이 사용된다는 점 때문에 알아두어야 할 필요가 있다 생각해 조사하고 적용해보았다.
 
-# Rollup?
+### Rollup?
 
 근본적으로, 롤업(Rollup)은 번들러(Bundler)이다. 흔히 잘 알려진 번들러로 웹팩(Webpack)이 있다. 번들러가 필요한 경우 기본적으로 웹팩을 사용한다고 생각해도 될 정도로 많이 사용되고 있다. 그렇다면 더 널리 사용되는 웹팩 대신 롤업을 사용해야 할 이유는 무엇인가? 롤업의 공식 사이트에서는 다음과 같은 기능을 내세우고 있다.
 
@@ -29,7 +27,7 @@ Rollup, 많이 들어보았지만 감히 사용하지 못하고 있던 번들러
 
 아무래도 ES6를 기본으로 한다는 점, 또 그로 인해 트리 셰이킹이 제대로 이뤄진다는 점 때문에 라이브러리 빌드 시 롤업을 보통 사용하게 된다.
 
-# 설치
+### 설치
 
 전역으로 설치
 
@@ -43,9 +41,9 @@ pnpm add -D rollup
 
 난 로컬 설치만 하는 것을 선호한다. (전역 설치하더라도 프로젝트에 버전 명시해두는 것을 추천한다. 어차피 빌드 스크립트를 롤업 명령어 기반으로 작성할 것이다.)
 
-# 사용
+### 사용
 
-### 스크립트(명령어)
+#### 스크립트(명령어)
 
 번들링에 롤업을 사용하는 가장 간단한 방법은 다음과 같다.
 
@@ -61,7 +59,7 @@ rollup input.js --file output.js --format cjs
 
 보통 개발 시엔 `rollup -cw`와 같이 워칭 옵션으로 빌드하고, 배포를 위한 빌드 시엔 `rollup -c`로 빌드하면 큰 문제 없을 것 같다.
 
-### 설정 파일(`rollup.config.js`)
+#### 설정 파일(`rollup.config.js`)
 
 앞서 `-c` 플래그의 설명에 나타나 있듯이, 롤업의 설정 파일은 기본적으로 프로젝트의 루트에 `rollup.config.js` 파일을 사용한다. [공식 문서](https://rollupjs.org/command-line-interface/#configuration-files)에서 전체적인 내용을 확인할 수 있다.
 
@@ -76,6 +74,8 @@ export default {
 	}
 };
 ```
+
+
 
 [Rollup 기반 라이브러리 개발 환경 구성하기 - 재그지그의 개발 블로그 (wormwlrm.github.io)](https://wormwlrm.github.io/2021/11/07/Rollup-React-TypeScript.html)
 

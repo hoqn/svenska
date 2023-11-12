@@ -5,6 +5,7 @@ created_at: 2023-06-21
 edited_at: 2023-06-21
 tags:
 - Web FE
+draft: true
 ---
 
 # 모노레포 환경 구축하기 (feat. Lerna + Nx)
@@ -58,5 +59,11 @@ lerna run build --scope=minipack
 ```
 
 이 내용은 모두 [공식 문서](https://lerna.js.org/docs/features/run-tasks)에 있다.
+
+### Nx?
+
+Lerna로 모노레포를 구성한다는 건 알겠다. 근데 `Nx`는 무엇이길래 같이 언급되고 또 같이 사용되는 것일까?
+
+
 
 [[DS] Monorepo 환경에서 디자인시스템 구축 I | SONGC](https://blog.songc.io/react/design-system-1/)

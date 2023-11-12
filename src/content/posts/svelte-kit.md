@@ -9,9 +9,11 @@ categories:
 tags:
   - Svelte
   - SvelteKit
+draft: true
 ---
 
-SvelteKit에는 `src/routes/` 하위 경로에 따라 라우팅을 해주는 기능이 들어가 있다. 이를 이용하기 위해 SvelteKit을 적용하기로 했다.
+SvelteKit은 React의 Next.js 같은 Svelte의 메타 프레임워크이다.
+나는 MPA, SSR 환경을 만들고자 SvelteKit을 적용하기로 했다.
 
 ## 방법 1. template 사용해 새로운 프로젝트 생성
 
@@ -37,11 +39,7 @@ import * as path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [sveltekit()],
-  resolve: {
-    alias: {
-      '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap')
-    }
-  }
+  ...
 })
 ```
 

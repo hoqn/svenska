@@ -3,7 +3,7 @@ import PostListPage from "@/layouts/PostListPage.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("posts").then((e) =>
-  e.sort((a, b) => a.data.created_at.getTime() - b.data.created_at.getTime())
+  e.sort((a, b) => b.data.created_at.getTime() - a.data.created_at.getTime())
 );
 
 ---

@@ -16,6 +16,8 @@ const posts = defineCollection({
 
     created_at: z.date(),
     edited_at: z.date().optional(),
+
+    draft: z.boolean().nullish(),
   }),
 });
 
