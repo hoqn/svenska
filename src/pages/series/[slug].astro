@@ -22,7 +22,7 @@ export interface Props {
 const { series } = Astro.props;
 const { Content, headings } = await series.render();
 
-const posts = await getCollection("posts", ({ data }) => data.series?.slug === series.slug);
+const posts = await getCollection("posts", ({ data: { series: postSeries, draft } }) => (postSeries?.slug === series.slug) && (import.meta.env.PROD ? !draft : true));
 ---
 
 <!-- <ListScaffoldLayout currentShowType="series">

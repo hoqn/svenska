@@ -4,7 +4,7 @@ import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
 import { getCollection } from "astro:content";
 
 const serieses = await getCollection("serieses");
-const postsInSeries = await getCollection("posts", ({ data }) => !!data.series);
+const postsInSeries = await getCollection("posts", ({ data: { series, draft } }) => !!series && (import.meta.env.PROD ? !draft : true) );
 
 let counts = serieses.reduce((ac, { slug }) => ({...ac, [slug]: 0}), {}) as Record<typeof serieses[number]['slug'], number>;
 postsInSeries.forEach(({ data: { series } }) => {

@@ -2,7 +2,7 @@
 import PostListPage from "@/layouts/PostListPage.astro";
 import { getCollection } from "astro:content";
 
-const posts = await getCollection("posts").then((e) =>
+const posts = await getCollection("posts", ({ data: { draft } }) => import.meta.env.PROD ? !draft : true ).then((e) =>
   e.sort((a, b) => b.data.created_at.getTime() - a.data.created_at.getTime())
 );
 

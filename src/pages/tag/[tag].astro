@@ -24,7 +24,7 @@ export interface Props {
 
 const { tag } = Astro.props;
 
-const posts = await getCollection("posts", ({ data: { tags } }) => (!!tags && tags.length) && tags.includes(tag) );
+const posts = await getCollection("posts", ({ data: { tags, draft } }) => (!!tags && tags.length) && tags.includes(tag) && (import.meta.env.PROD ? !draft : true) );
 ---
 
 <ListScaffoldLayout currentShowType="tag">
