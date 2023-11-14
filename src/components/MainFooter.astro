@@ -1,6 +1,7 @@
 <footer class="footer">
   <div class="container">
-    <p>Hogyun Jeon © 2023</p>
+    <p class="footer__copyright">Hogyun Jeon © 2023</p>
+    <p class="footer__buildinfo">이 블로그는 <a href="https://astro.build">🚀 astro</a>로 만들었어요!</p>
   </div>
 </footer>
 
@@ -14,5 +15,14 @@
     // background-color: color.primary(3);
     color: color.primary(12);
     text-align: center;
+  }
+
+  .footer__copyright {
+    font-size: 1em;
+  }
+
+  .footer__buildinfo {
+    margin-top: 1rem;
+    font-size: .875em;
   }
 </style>
