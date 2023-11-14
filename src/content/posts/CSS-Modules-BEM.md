@@ -3,7 +3,6 @@ title: "CSS Modules에서 BEM 깔끔하게 사용하기"
 subtitle: "보다 구조적으로!"
 created_at: 2023-06-21
 edited_at: 2023-11-10
-draft: true
 ---
 
 나는 CSS를 그대로 사용하는 것을 좋아한다. React를 사용하면서 Styled-Component나 Emotion과 같은 CSS-in-JS 라이브러리들이 큰 인기를 끌었고 많이 사용되었지만, 나는 여전히 CSS에 기반을 둔 방법을 가장 좋아한다. 물론 CSS를 생(?)으로 사용하기엔 기능적인 측면이나, 호환성 측면에서 부족한 점이 많기 때문에 Sass와 같은 대체 언어와 Postcss를 애용한다.
@@ -30,12 +29,12 @@ draft: true
 
 나와 비슷한 고민을 가진 사람이 있지 않을까 하고 찾아보았다. 너무 훌륭한 방법들이 이미 많이 존재했다!
 
-##### CVA(Class Variance Authority)
+#### CVA(Class Variance Authority)
 
 CSS Modules만을 위한 방법은 아니다. 클래스 이름을 각 variant에 맞게 반환해주는 유틸 함수라고 할 수 있다.
 
 ```js
-const button = cva("button", {
+const $button = cva("button", {
   variants: {
     intent: {
       primary: "button--primary",
@@ -46,11 +45,91 @@ const button = cva("button", {
       md: "button--md",
       lg: "button--lg",
     },
+  },
+  defaultVariants: {
+    intent: "primary",
+    size: "md",
   }
 });
 
-
+// 사용 시
+$button({ intent: "secondary", size: "lg" });
+// <=> "button button--secondary button--lg" 
 
 ```
 
-이런 식으로 활용할 수 있다!
+이런 식으로 활용할 수 있다! 정말 깔끔한 방법이라 생각한다. 심지어 BEM 말고 Tailwind와 같은 방법론과도 호환되기 아주 좋다. 사실 비슷한 라이브러리를 직접 작성하려다 이미 이런 훌륭한 라이브러리가 있음을 알고 포기하기도 하였다.
+
+#### 생성되는 json 파일 자체를 바꿔버리기 (Webpack Loader로 구현)
+
+사실, json 파일 자체를 BEM스럽게 바꾸면 재미있겠다는 생각이 들어 구현하기 위해 검색을 하던 중 아래와 같은 재미있는 글을 발견했다.
+
+https://medium.com/trabe/using-bem-conventions-in-css-modules-leveraging-custom-webpack-loaders-fd985f72bcb2
+
+멋지다! 커스텀한 Webpack Loader로 생성되는 json 자체를 nested하게 바꾼다.
+
+직접 이 방법을 적용해보았는데, 문제가 있긴 했다. `toString` 멤버를 이용해 문자열로 변환하는데, 문제는 자동으로 `toString()`이 호출되는 경우엔 문제 없지만 본질적으로 `string`이 아니라 `object`라는 것이었다.
+이것은 `clsx`나 `classnames` 같은 유틸 함수를 사용할 때 문제가 되었으며, 동시에 TypeScript와의 궁합에도 좋지 않았다.
+
+따라서 위 방법대로 하되, `toString` 멤버를 선언해서 변환하지 말고 그냥 `button.base`와 같은 방식으로 구현해야 하지 않을까 싶다.
+
+재미있는 방법이지만 `CVA`에 비해 효율적이라고는 못하겠다. `primary small button` 버튼을 가리킨다고 쳐보자. 그렇다면 아래와 같이 클래스 이름이 작성되어야 한다.
+
+```js
+className="button button--primary button--small"
+```
+
+이것을 `CVA`에선 `button({ intent: "primary", size: "small" })`과 같은 방법으로 쓸 수 있다. `CSS` 상의 원래 변수를 생각할 것 없이 그냥 `js` 유틸 함수를 사용하는 느낌과 같다.
+
+반면, 위 방법에선 `styles.button`, `styles.button.$small`, `styles.button.$primary`와 같이 세 개를 각각 작성해야 한다. 결국 `js`스럽지 않고 `CSS` 내지는 `HTML` 스럽게 작성하게 된다.
+
+
+<!-- ### 그런데...
+
+어차피 BEM 방법론만 사용할 거라면, CSS Modules 구현체가 생성하는 과정에서 비슷한 코드를 자동으로 생성해주면 더 좋지 않을까? 예컨대 다음과 같은 방식이다.
+
+```css
+/* button.module.css */
+.button {
+  ...
+}
+
+.button--primary {
+  ...
+}
+
+.button--md {
+  ...
+}
+
+.button__label {
+  ...
+}
+
+.button__label--light {
+  ...
+}
+```
+
+```js
+// button.jsx
+import $ from "./button.module.css";
+
+$.button; // "button"
+$.button("primary", "md"); // "button button--primary button--md"
+$.button.label("light"); // "button__label--light"
+```
+
+그렇다면 생성되어야 하는 코드는 아래와 같다.
+
+```js
+const styleSheet = function() {
+  
+}
+styleSheet.toString() = () => "button";
+
+styleSheet.label = () => {
+  
+}
+``` -->
+
