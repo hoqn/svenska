@@ -7,6 +7,8 @@ import react from "@astrojs/react";
 import i18next from "astro-i18next";
 import sitemap from "@astrojs/sitemap";
 
+import remarkCallouts from "remark-obsidian-callout";
+
 const locales = {
   ko: "ko-KR",
   en: "en-US",
@@ -46,4 +48,7 @@ export default defineConfig({
     }),
     i18next(),
   ],
+  markdown: {
+    remarkPlugins: [remarkCallouts],
+  },
 });
