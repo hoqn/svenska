@@ -1,0 +1,164 @@
+---
+import { Image } from "astro:assets";
+import { marked } from "marked";
+import { hasDetailedPage, type Work } from "./_data/types";
+
+export interface Props {
+  item: Work;
+}
+
+const { item } = Astro.props;
+const summaryContent = item.summary && (await marked.parse(item.summary));
+---
+
+<li class="work-list-item">
+  <div class="work-list-item__inner">
+    <h3 class="work-list-item__title">
+      {
+        item.icon && (
+          <span class="work-list-item__icon">
+            {typeof item.icon === "string" ? (
+              item.icon
+            ) : (
+              <Image
+                src={item.icon}
+                alt="프로젝트 아이콘"
+                width={24}
+                height={24}
+              />
+            )}
+          </span>
+        )
+      }
+      <span>{item.title}</span>
+    </h3>
+    <div class="work-list-item__date">
+      {item.startDate} ― {item.endDate}
+    </div>
+    <div>
+      {
+        !!item.stacks?.length && (
+          <div class="work-list-item__stacks work-list-item__content">
+            {item.stacks.map((it) => (
+              <span class="stack-chip">{it}</span>
+            ))}
+          </div>
+        )
+      }
+    </div>
+    {
+      !!summaryContent && (
+        <div class="summary work-list-item__content">
+          <div class="markdown-body" set:html={summaryContent} />
+        </div>
+      )
+    }
+    {
+      hasDetailedPage(item) && (
+        <div class="link-container">
+          <a
+            class="link pressable pressable--opacity"
+            href={`/works/${item.slug}`}
+          >
+            자세한 이야기는 여기 있어요
+          </a>
+        </div>
+      )
+    }
+  </div>
+</li>
+
+<style lang="scss">
+  @use "color";
+  @use "mixin";
+  @use "media";
+
+  
+  .work-list-item {
+    display: block;
+    // background-color: color.neutral(2);
+    // box-shadow: 0 0 0 1px color.neutral(6);
+    // border-radius: 1rem;
+    
+    & + & {
+      border-top: 2px solid color.neutral(6);
+    }
+
+    &__content {
+      margin-left: -1.5rem;
+      
+      @include media.lg {
+        margin-left: 0;
+      }
+    }
+
+    &__inner {
+      display: block;
+      padding: 1.5rem 1rem;
+
+      margin-left: 1.5rem;
+    }
+
+    &__icon {
+      display: inline-block;
+      position: relative;
+      width: 0;
+      height: 1.5rem;
+      right: 1.5rem + 0.5rem;
+      vertical-align: middle;
+    }
+
+    &__title {
+      font-weight: bold;
+      font-size: 1.25rem;
+
+      margin-bottom: 1rem;
+    }
+
+    &__date {
+      position: relative;
+      top: -1rem;
+      color: color.neutral(11);
+      opacity: 0.75;
+    }
+
+    &__stacks {
+      display: flex;
+      font-size: 0.875rem;
+      flex-flow: row wrap;
+      gap: 1rem;
+    }
+  }
+
+  .stack-chip {
+    display: inline-block;
+    padding: 0 0.75rem;
+    line-height: 1.5rem;
+
+    border-radius: 9999px;
+    color: color.primary(12);
+    background-color: color.primary(3);
+    box-shadow: 0 0 0 1px color.primary(6);
+  }
+
+  .link-container {
+    text-align: right;
+  }
+
+  .link {
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding: 0 0.5rem;
+    margin-left: auto;
+    font-weight: 600;
+
+    &::after {
+      content: "\f045";
+    }
+  }
+
+  .summary {
+    padding: 1rem 0;
+  }
+</style>

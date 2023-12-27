@@ -1,9 +1,10 @@
 ---
 title: "학교+"
 stacks:
-- React
+- Kotlin
+- Android
 start_date: 2020. 03.
-icon: "././hakkyoplus/hakkyoplus__logo.png"
+icon: "./hakkyoplus/hakkyoplus__logo.png"
 # icon: "🎁"
 ---
 

@@ -1,7 +1,9 @@
 ---
 title: "시네마 서울"
-stack:
+stacks:
+- TypeScript
 - React
+- Vite
 start_date: 2023. 04.
 end_date: 2023. 06.
 icon: "🎞"

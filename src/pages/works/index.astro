@@ -1,0 +1,78 @@
+---
+import CustomPage from "@/layouts/CustomPage.astro";
+import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+import { type Work, hasDetailedPage } from "./_data/types";
+import * as data from "./_data/works";
+import WorkItem from "./_work-item.astro";
+
+// const Data = z.record(z.enum(["default"]), z.array(z.string()));
+// const data = Data.parse(dataRaw);
+
+// const defaultWorks = await getEntries<"works">(
+//   data.default
+//     ? data.default.map((val) => ({
+//         collection: "works",
+//         slug: val as any,
+//       }))
+//     : [],
+// );
+
+function unifyWorksWithDetail(works: Work[]) {
+  return Promise.all(
+    works.map(async (work) => {
+      if (hasDetailedPage(work)) {
+        const detail = await getEntry({
+          collection: "works",
+          slug: work.slug,
+        });
+
+        return {
+          title: detail.data.title || undefined,
+          icon: detail.data.icon || undefined,
+          startDate: detail.data.start_date || undefined,
+          endDate: detail.data.end_date || undefined,
+          stacks: detail.data.stacks || undefined,
+          ...work,
+        } satisfies Work;
+      } else {
+        return work;
+      }
+    }),
+  );
+}
+
+const normalWorks: Work[] = await unifyWorksWithDetail(data.normal);
+const miscWorks: Work[] = await unifyWorksWithDetail(data.misc);
+---
+
+<CustomPage
+  frontmatter={{
+    title: "프로젝트",
+  }}
+>
+  <div slot="markdown-body::before">
+    <ul class="work-list work-list--normal">
+      {normalWorks.map((item) => <WorkItem item={item} />)}
+    </ul>
+
+    <div class="markdown-body">
+      <hr />
+      <h2>작은 것들</h2>
+      <p>아래는 아주 간단하거나, 도중에 중단된 프로젝트예요.</p>
+    </div>
+
+    <ul class="work-list work-list--misc">
+      {miscWorks.map((item) => <WorkItem item={item} />)}
+    </ul>
+  </div>
+</CustomPage>
+
+<style lang="scss">
+  @use "color";
+  @use "mixin";
+  @use "media";
+
+  .work-list {
+  }
+</style>
