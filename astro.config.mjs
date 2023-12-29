@@ -6,6 +6,7 @@ import react from "@astrojs/react";
 // import i18nRouting from "astro-i18n-aut";
 import i18next from "astro-i18next";
 import sitemap from "@astrojs/sitemap";
+import mdIntegration from "@astropub/md";
 
 import remarkCallouts from "remark-obsidian-callout";
 
@@ -47,6 +48,7 @@ export default defineConfig({
       },
     }),
     i18next(),
+    mdIntegration(),
   ],
   markdown: {
     remarkPlugins: [remarkCallouts],

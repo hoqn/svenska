@@ -1,8 +1,9 @@
-import type { CollectionEntry, ImageFunction, z } from "astro:content";
+import type { ImageMetadata } from "astro";
+import type { CollectionEntry } from "astro:content";
 
 type WorkWithoutDetailedPage = {
   title: string;
-  icon: string | z.infer<ReturnType<ImageFunction>>;
+  icon: string | ImageMetadata;
   startDate?: string | Date;
   endDate?: string | Date;
   stacks: string[];

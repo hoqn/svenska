@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { marked } from "marked";
+import { Markdown } from "@astropub/md";
 import { hasDetailedPage, type Work } from "./_data/types";
 
 export interface Props {
@@ -8,7 +8,6 @@ export interface Props {
 }
 
 const { item } = Astro.props;
-const summaryContent = item.summary && (await marked.parse(item.summary));
 ---
 
 <li class="work-list-item">
@@ -47,9 +46,11 @@ const summaryContent = item.summary && (await marked.parse(item.summary));
       }
     </div>
     {
-      !!summaryContent && (
+      !!item.summary?.length && (
         <div class="summary work-list-item__content">
-          <div class="markdown-body" set:html={summaryContent} />
+          <div class="markdown-body">
+            <Markdown of={item.summary}/>
+            </div>
         </div>
       )
     }
