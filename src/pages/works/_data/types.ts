@@ -8,6 +8,7 @@ type WorkWithoutDetailedPage = {
   endDate?: string | Date;
   stacks: string[];
   summary?: string;
+  roles?: string | string[];
 };
 
 type WorkWithDetailedPage = Partial<WorkWithoutDetailedPage> & {

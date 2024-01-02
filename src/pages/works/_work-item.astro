@@ -13,26 +13,41 @@ const { item } = Astro.props;
 <li class="work-list-item">
   <div class="work-list-item__inner">
     <h3 class="work-list-item__title">
+      <>
+        {
+          item.icon && (
+            <span class="work-list-item__icon">
+              {typeof item.icon === "string" ? (
+                item.icon
+              ) : (
+                <Image
+                  src={item.icon}
+                  alt="프로젝트 아이콘"
+                  width={24}
+                  height={24}
+                />
+              )}
+            </span>
+          )
+        }
+        <span>{item.title}</span>
+      </>
+    </h3>
+    <div class="work-list-item__sub">
+      <span class="work-list-item__date">
+        {item.startDate} ― {item.endDate}
+      </span>
       {
-        item.icon && (
-          <span class="work-list-item__icon">
-            {typeof item.icon === "string" ? (
-              item.icon
-            ) : (
-              <Image
-                src={item.icon}
-                alt="프로젝트 아이콘"
-                width={24}
-                height={24}
-              />
+        !!item.roles?.length && (
+          <span class="work-list-item__roles">
+            {(typeof item.roles === "string" ? [item.roles] : item.roles).map(
+              (role) => (
+                <span>{role}</span>
+              ),
             )}
           </span>
         )
       }
-      <span>{item.title}</span>
-    </h3>
-    <div class="work-list-item__date">
-      {item.startDate} ― {item.endDate}
     </div>
     <div>
       {
@@ -49,8 +64,8 @@ const { item } = Astro.props;
       !!item.summary?.length && (
         <div class="summary work-list-item__content">
           <div class="markdown-body">
-            <Markdown of={item.summary}/>
-            </div>
+            <Markdown of={item.summary} />
+          </div>
         </div>
       )
     }
@@ -74,20 +89,19 @@ const { item } = Astro.props;
   @use "mixin";
   @use "media";
 
-  
   .work-list-item {
     display: block;
     // background-color: color.neutral(2);
     // box-shadow: 0 0 0 1px color.neutral(6);
     // border-radius: 1rem;
-    
+
     & + & {
       border-top: 2px solid color.neutral(6);
     }
 
     &__content {
       margin-left: -1.5rem;
-      
+
       @include media.lg {
         margin-left: 0;
       }
@@ -116,11 +130,27 @@ const { item } = Astro.props;
       margin-bottom: 1rem;
     }
 
-    &__date {
+    &__sub {
       position: relative;
       top: -1rem;
       color: color.neutral(11);
       opacity: 0.75;
+    }
+
+    &__date {
+    }
+
+    &__roles {
+      &::before {
+        content: "|";
+        margin: 0 0.5rem;
+      }
+
+      > * + * {
+        &::before {
+          content: ", ";
+        }
+      }
     }
 
     &__stacks {

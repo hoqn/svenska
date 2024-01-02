@@ -3,6 +3,7 @@ import type { Work } from "./types";
 const normal = [
   {
     slug: "readiary",
+    roles: ["웹 프런트엔드", "기획"],
     summary: `
 학부 종합설계 과목을 수강하며 수행한 프로젝트예요. 읽은 책을 기록하고 GPT와 Stable Diffusion과 같은 LLM을 활용하여 책에 대한 질문과 이미지를 생성하는 웹 서비스예요. 이는 단순히 책을 기록하는 것을 넘어 효과적인 독후활동을 도와준답니다.
 
@@ -11,6 +12,7 @@ const normal = [
   },
   {
     slug: "cinema-seoul",
+    roles: ["웹 프런트엔드", "데이터베이스"],
     summary: `
 학부 설계과목 중 '데이터베이스 설계' 과목을 수강하며 수행한 프로젝트예요. 가상의 영화관을 위한 예매 및 영화관 상영 일정 관리 웹 서비스예요. 고객들이 영화를 검색하고 예매할 수 있는 고객용 웹 서비스와, 직원들이 영화 정보와 상영 일정을 등록할 수 있는 직원용 웹 서비스를 동시에 개발했어요.
 
@@ -19,6 +21,7 @@ const normal = [
   },
   {
     slug: "mr-daebak",
+    roles: ["웹 백엔드", "데이터베이스"],
     summary: `
 학부 설계과목 중 '소프트웨어 공학' 과목을 수강하며 수행한 프로젝트예요. 가상의 음식점을 위한 음식 배달 주문 및 음식점 관리 웹 서비스예요. 고객들이 음식과 옵션들을 고르고 주문할 수 있는 고객용 웹 서비스와, 직원 정보나 재료 수급 관리와 같은 음식점 내부 정보를 관리하는 직원용 웹 서비스를 동시에 개발했어요.
 
@@ -27,6 +30,7 @@ const normal = [
   },
   {
     slug: "hakkyoplus",
+    roles: ["앱(안드로이드)"],
     summary: `
 취미로 만들었던 앱 프로젝트예요. 전국 초중고 학생들을 대상으로 시간표 관리, 식단 확인, 그리고 학사일정 확인을 제공하는 학교 생활 도움 앱이에요. 공공API 중 교육부 NEIS의 API를 활용하여 만들었어요.
 
@@ -39,6 +43,7 @@ const misc = [
   {
     title: "개인 블로그(Astro)",
     icon: "🏈",
+    roles: ["웹 프런트엔드", "기획"],
     stacks: ["TypeScript", "Astro"],
     startDate: "2023.",
     summary: `
@@ -49,6 +54,7 @@ const misc = [
   {
     title: "Send2Tistory",
     icon: "🎩",
+    roles: ["앱 (안드로이드)"],
     stacks: ["Kotlin", "Android", "Jetpack Compose"],
     startDate: "2021.",
     endDate: "2021.",
