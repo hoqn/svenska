@@ -138,13 +138,19 @@ html.is-changing {
 .markdown-body blockquote[data-callout] {
   padding: 1rem;
   border-left: none;
-  background-color: rgba(var(--callout-color), 0.1);
+  background-color: rgba(var(--callout-color) / 0.1);
   border-radius: .25rem;
 
   color: inherit !important;
 
   &.callout-warning {
-    --callout-color: 236, 117, 0;
+    --callout-color: 247 107 21;
+  }
+  &.callout-info, &.callout-note {
+    --callout-color: 41 163 131;
+  }
+  &.callout-danger, &.callout-error, &.callout-failure, &.callout-fail, &.callout-missing {
+    --callout-color: 229 77 46;
   }
 
   .callout-title {

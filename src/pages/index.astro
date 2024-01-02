@@ -194,10 +194,8 @@ const locale = staticI18n(Astro.url.pathname);
 		.links {
 			display: flex;
 			flex-direction: row;
-
-			> * + * {
-				margin-left: 0.5rem;
-			}
+			flex-flow: wrap;
+			gap: 1rem .5rem;
 		}
 
 		.links__item {
