@@ -5,6 +5,7 @@ import { getEntry } from "astro:content";
 import { type Work, hasDetailedPage } from "./_data/types";
 import * as data from "./_data/works";
 import WorkItem from "./_work-item.astro";
+import { Markdown } from "@astropub/md";
 
 // const Data = z.record(z.enum(["default"]), z.array(z.string()));
 // const data = Data.parse(dataRaw);
@@ -52,6 +53,14 @@ const miscWorks: Work[] = await unifyWorksWithDetail(data.misc);
   }}
 >
   <div slot="markdown-body::before">
+    <div class="markdown-body">
+      <Markdown
+        of={`
+> \\* 표시는 제가 맡은 역할을 뜻해요
+    `}
+      />
+    </div>
+
     <ul class="work-list work-list--normal">
       {normalWorks.map((item) => <WorkItem item={item} />)}
     </ul>
