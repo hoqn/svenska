@@ -9,6 +9,7 @@ import sitemap from "@astrojs/sitemap";
 import mdIntegration from "@astropub/md";
 
 import remarkCallouts from "remark-obsidian-callout";
+import remarkMermaid from "astro-diagram/remark-mermaid";
 
 const locales = {
   ko: "ko-KR",
@@ -51,6 +52,6 @@ export default defineConfig({
     mdIntegration(),
   ],
   markdown: {
-    remarkPlugins: [remarkCallouts],
+    remarkPlugins: [remarkCallouts, remarkMermaid],
   },
 });
