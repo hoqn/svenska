@@ -31,14 +31,14 @@ const editedAt = data.edited_at && format(data.edited_at, "PPP", { locale: ko })
             </ul>
             )}
             <div class="list-item__meta">
-              {createdAt && (
-                <span class="list-item__date list-item__date--created">
-                  {t("posts.item.created", { date: data.created_at })}
-                  </span>
-                  )}
               {editedAt && (
                 <span class="list-item__date list-item__date--created">
                   {t("posts.item.edited", { date: data.edited_at })}
+                  </span>
+                  )}
+              {createdAt && (
+                <span class="list-item__date list-item__date--created">
+                  {t("posts.item.created", { date: data.created_at })}
                   </span>
                   )}
             </div>
