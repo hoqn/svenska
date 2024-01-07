@@ -11,8 +11,6 @@ icon: "📚"
 links:
   "Source": "https://github.com/hoqn/readiary-fe"
 ---
-> [!warning] 아직 작성 중인 글이에요
-
 > [!info] 정보
 > 
 > 이 글은 회고 성격의 글이에요.
@@ -163,7 +161,9 @@ Server Component를 활용하다보니 백엔드로의 API Fetching을 어떻게
 
 ##### Server Component 사용의 의의
 
-그렇다면 Server Component를 사용하는 의의는 무엇일까? 흔히 이름 때문에 Client는 CSR이고 Server는 SSR일 거라 착각하기 쉽다. 이는 완전히 잘못되었다. Client Component도 기본적으로 SSR로 구현된다! 서버에서 마크업으로 렌더링한 뒤, 
+그렇다면 Server Component를 사용하는 의의는 무엇일까? 흔히 이름 때문에 Client는 CSR이고 Server는 SSR일 거라 착각하기 쉽다. 이는 완전히 잘못되었다. Client Component도 기본적으로 SSR로 구현된다! 쉽게 말해, Server에서만 실행되는 게 Server Component, Client에서도 실행되는 게 Client Component이다.
+
+관련 내용은 별도로 [포스팅](/post/what-is-server-component)하였다.
 
 # 논문을 제출하다
 

@@ -8,6 +8,11 @@ icon: "./hakkyoplus/hakkyoplus__logo.png"
 # icon: "🎁"
 ---
 
+> [!info] 정보
+> 
+> 플레이스토어에 출시되어 있어요.  
+> https://play.google.com/store/apps/details?id=com.agravic.schoollife
+
 교육부 NEIS의 공개 API를 활용한 전국 초중고 학교 생활 도우미
 
 (Buddle은 프로젝트명)
