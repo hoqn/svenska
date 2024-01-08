@@ -36,15 +36,15 @@ stacks:
 
 재료 선택
 
-<img src="./makeju/ss-a.png" width="256"/>
+![](./makeju/ss-a.png)
 
 완성 페이지
 
 맥주잔의 외형, 따르는 애니메이션, 잔의 회전은 모두 순수 css로 구현하였다. (물론 마우스의 좌표 등은 js에서 inline style로 css variable 형태로 넘겨줬다)
 
-<img src="./makeju/ss-b1.jpg" width="256"/>
-<img src="./makeju/ss-b2.gif" width="256"/>
-<img src="./makeju/ss-b3.gif" width="256"/>
+![](./makeju/ss-b1.jpg)
+![](./makeju/ss-b2.gif)
+![](./makeju/ss-b3.gif)
 
 # 4. 회고 및 배운 점
 
