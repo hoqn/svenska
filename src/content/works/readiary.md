@@ -1,21 +1,22 @@
 ---
 title: "리다이어리(Readiary)"
 stacks:
-- TypeScript
-- React
-- Next.js
-- RSC
+  - TypeScript
+  - React
+  - Next.js
+  - RSC
 start_date: 2023. 09.
 end_date: 2023. 12.
 icon: "📚"
 links:
   "Source": "https://github.com/hoqn/readiary-fe"
 ---
+
 > [!info] 정보
-> 
+>
 > 이 글은 회고 성격의 글이에요.
 > 프로젝트에 대한 다른 정보들은 다음 링크를 이용해주세요.
-> 
+>
 > - 프로젝트 깃허브: https://github.com/relaxed-mind/book-diary
 > - FE 레포 깃허브: https://github.com/hoqn/readiary-fe
 
@@ -37,8 +38,8 @@ links:
 
 처음엔 독서록을 생성하는 데 도움을 주면 더 쉬운 독서가 가능하지 않을까 생각했다. 하지만 이 부분은 독서록을 작성하는 행위 자체를 대체한다는 점에서 필요성에 의문이 들었다. 그래서 나는 아래와 같은 아이디어를 제시했다.
 
-> 독서록 자체를 생성하는 게 별로라면, *독서록 작성을 위한 화제만을 던져주는 건 어떨까?*
-> 
+> 독서록 자체를 생성하는 게 별로라면, _독서록 작성을 위한 화제만을 던져주는 건 어떨까?_
+>
 > 그래, **책에 대한 (생각해볼 만한) 질문들을 생성하자!**
 
 독서를 하며 책의 일부를 발췌한 스크랩을 기반으로 책에 대한 (생각해볼 만한) 질문들을 생성한다. 하지만 스크랩은 책에 대한 간접적인 정보이므로 전체적인 질문이 매끄러울 수 있을지 많이 불안했다. 그래서 나는 이 지점에서 다음과 같은 의견을 냈고, 채택되었다.
@@ -71,20 +72,20 @@ links:
 
 ## 스택
 
-이번 프로젝트는 약간의 내 욕심이 들어갔다. `Next.js` 13 버전 이상에서 지원되는 `App Routing` 방식을 십분 활용하고 싶었기 때문이다. 
+이번 프로젝트는 약간의 내 욕심이 들어갔다. `Next.js` 13 버전 이상에서 지원되는 `App Routing` 방식을 십분 활용하고 싶었기 때문이다.
 
 프런트엔드 부분의 개발 스택은 아래와 같다.
 
 - 언어/프레임워크
-	- TypeScript
-	- Sass (CSS Modules과 함께 사용)
-	- Next.js
+  - TypeScript
+  - Sass (CSS Modules과 함께 사용)
+  - Next.js
 - 주요 라이브러리
-	- `zustand`
-	- `react-hook-form`
-	- `@tanstack/react-query`
-	- `framer-motion`
-	- `@ducanh2912/next-pwa`
+  - `zustand`
+  - `react-hook-form`
+  - `@tanstack/react-query`
+  - `framer-motion`
+  - `@ducanh2912/next-pwa`
 
 ## 개발
 
@@ -140,20 +141,24 @@ links:
 
 Server Component를 활용하다보니 백엔드로의 API Fetching을 어떻게 처리해야 할지 난감했다. 모든 Fetching을 Client에서 할 것인가, Server에서 할 것인가..
 
-처음엔 Client와 Server에서의 Fetching을 모두 사용했다. 문제는 로그인 처리에서였다..
+처음엔 Client와 Server에서의 Fetching을 모두 혼용해서 사용했다. 로그인 관련해서도 생각할 거리가 있었다.
 
 - Client에서 Fetching하는 경우 -> JWT 토큰을 저장하고 있어야 함(Web Storage 또는 Zustand와 같은 전역 상태로 관리 必)
 - Server에서 Fetching하는 경우 -> JWT 토큰을 Cookie에 저장하고 있어야 함
 
-물론 Client와 Server에서 모두 접근할 수 있는 Cookie 방식이 있긴 하다. 그런데 보안상 좋지 않아 보였다. 그래서 내가 처음 선택했던 방법은 `httpOnly Cookie`와 `zustand state` 두 곳에 JWT를 저장하는 것이다. 물론 이 두 정보를 동기화해주는 로직도 작성해놓았다.
+처음엔 두 곳에서 모두 이용하기 위해 `httpOnly Cookie`와 `zustand state` 두 곳에 JWT를 저장했다. 물론 이 두 정보를 동기화해주는 로직도 작성해놓았다.
 
 그러던 중...
 
 ### Server Action
 
-모두 Server Action으로 통합해버렸다. Server Action 내의 코드는 Server에서 동작하기 때문에 JWT 토큰은 `httpOnly Cookie`에만 저장해줬다. 비교적 신기능이라 도입을 망설였지만, 시험적으로 사용해보니 이거 물건이다.. Client와 Server 사이의 요청을 상당히 자연스럽게 연결해준다.
+모두 Server Action으로 통합해버렸다. Server Action 내의 코드는 Server에서 동작하기 때문에 JWT 토큰은 `httpOnly Cookie`에만 저장해줬다. 비교적 신기능이라 (문서가 많지 않아) 도입을 망설였지만, 시험적으로 사용해보니 충분히 좋은 것 같았다.
 
-단점이라면.. 아직까지 디버깅하기 너무 어렵다. 이 때문에 예외 처리도 힘들다. 또한 pure object만 주고받을 수 있기 때문에 백엔드 요청에서의 오류를 Client로 보내기 전 처리해야 한다. (왜냐하면 Client로 Response 자체를 보낼 순 없다. 그래서 Response.ok인 경우 data를 반환시키고, 오류인 경우 메시지만을 따로 보내줘야 한다. 물론 이 부분은 메시지 형식을 확실히하면 문제 없을 것 같다. 이번 프로젝트에선 시간 관계 상 이 부분에 대한 연구와 개발이 매우 부족했다고 생각한다.) 예외 처리 부분은 사실 시간 문제로 제대로 하지 못했는데, 이 부분이 아쉽다..
+사실 모두 서버 측에서 처리하기 어렵다고 판단했던 게 바로 API Route를 일일히 다시 짜준다는 게, 이미 백엔드를 별도로 개발하는 상황에서 또 다른 백엔드 작업을 하는 느낌이었던 게 컸다. 하지만 Server Action은 Client와 Server 사이의 요청을 상당히 자연스럽게 연결해준다. 어차피 클라이언트에서만 처리해도 API 요청만을 담는 코드를 따로 작성해야 하는데, 이런 느낌으로 서버 측 요청을 구현할 수 있었다!
+
+단점이라면.. (아직까지는) 클라이언트 호출에 비해 디버깅하기 어려웠다.
+
+또한 pure object만 주고받을 수 있기(이건 Server Component와 Client Component 사이에서도 마찬가지) 백엔드 요청에서의 오류를 Client로 보내기 전 처리해야 한다. 이건 어떻게 보면 Server Action도 결국 HTTP 통신이라는 걸 생각하면 수긍되는 부분이다. 예외 처리 부분은 사실 백엔드 파트와의 얘기도 덜 됐고, 시간 문제로 제대로 하지 못했는데 이 부분이 아쉽다..
 
 ### 아직 낯선 `App` 구조
 
