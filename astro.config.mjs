@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 
 import yaml from "@rollup/plugin-yaml";
+import svgr from "vite-plugin-svgr";
 
 import react from "@astrojs/react";
 // import i18nRouting from "astro-i18n-aut";
@@ -23,7 +24,7 @@ export default defineConfig({
   base: "/",
   srcDir: "./src",
   vite: {
-    plugins: [yaml()],
+    plugins: [yaml(), svgr({ include: "**/*.svg?raw&react" })],
     css: {
       preprocessorOptions: {
         scss: {
