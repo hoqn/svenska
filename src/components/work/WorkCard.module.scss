@@ -1,0 +1,149 @@
+@use "color";
+@use "mixin";
+@use "media";
+
+$left-inset: calc(1.5rem + 0.5rem);
+
+.root {
+  // composes: pressable pressable--pers from global;
+  // border-radius: 0.25rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: color.primary(1);
+  border: solid 1px color.primary(6);
+
+  transition: 0.15s ease-in-out;
+
+  @media screen and (hover: hover) {
+    &:hover {
+      transform: scaleX(1.02) scaleY(1.02) scaleZ(1);
+    }
+  }
+}
+
+.head {
+  padding: 1rem;
+}
+
+.title {
+  position: relative;
+  padding-left: $left-inset;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  color: color.primary(12);
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  vertical-align: baseline;
+
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.subdata {
+  margin-top: 0.5rem;
+  padding-left: $left-inset;
+  color: color.primary(11);
+  line-height: 100%;
+
+  > * + * {
+    margin-top: 0.5rem;
+  }
+}
+
+.subdata__row {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+}
+
+.date {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.roles {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.stacks {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+}
+
+.stack {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  background-color: color.primary(3);
+  border: 1px solid color.primary(6);
+  border-radius: 0.25rem;
+}
+
+.body {
+  padding: 1rem 1.5rem;
+}
+
+.footer {
+  padding: 1rem 1.5rem;
+  background-color: color.primary(3);
+  border-top: 1px solid color.primary(6);
+  overflow: hidden;
+  //
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.links {
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+}
+
+.link {
+  composes: pressable pressable--opacity from global;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  text-wrap: nowrap;
+  //
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.link__icon {
+  vertical-align: middle;
+  margin-right: 0.25rem;
+  fill: currentColor;
+}
+
+.more-button {
+  flex: 0 0 auto;
+  border-radius: 0.25rem;
+  background-color: color.primary(9);
+  color: color.primary(1);
+  padding: 0.5rem 1rem;
+  margin: -0.5rem -0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 100%;
+}
