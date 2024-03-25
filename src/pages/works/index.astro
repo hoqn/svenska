@@ -1,28 +1,16 @@
 ---
 import CustomPage from "@/layouts/CustomPage.astro";
-import { Image } from "astro:assets";
-import { getEntry } from "astro:content";
-import { type Work, hasDetailedPage } from "./_data/types";
-import * as data from "./_data/works";
-import WorkItem from "./_work-item.astro";
 import { Markdown } from "@astropub/md";
+import { getEntry } from "astro:content";
+// import { hasDetailedPage, type Work } from "./_data/types";
+// import * as data from "./_data/works";
+import * as data from "@/data/works";
+import WorkCard from "@/components/work/WorkCard";
 
-// const Data = z.record(z.enum(["default"]), z.array(z.string()));
-// const data = Data.parse(dataRaw);
-
-// const defaultWorks = await getEntries<"works">(
-//   data.default
-//     ? data.default.map((val) => ({
-//         collection: "works",
-//         slug: val as any,
-//       }))
-//     : [],
-// );
-
-function unifyWorksWithDetail(works: Work[]) {
+function unifyWorksWithDetail(works: data.Work[]) {
   return Promise.all(
     works.map(async (work) => {
-      if (hasDetailedPage(work)) {
+      if (data.hasDetailedPage(work)) {
         const detail = await getEntry({
           collection: "works",
           slug: work.slug,
@@ -35,7 +23,7 @@ function unifyWorksWithDetail(works: Work[]) {
           endDate: detail.data.end_date || undefined,
           stacks: detail.data.stacks || undefined,
           ...work,
-        } satisfies Work;
+        } satisfies data.Work;
       } else {
         return work;
       }
@@ -43,8 +31,8 @@ function unifyWorksWithDetail(works: Work[]) {
   );
 }
 
-const normalWorks: Work[] = await unifyWorksWithDetail(data.normal);
-const miscWorks: Work[] = await unifyWorksWithDetail(data.misc);
+const normalWorks: data.Work[] = await unifyWorksWithDetail(data.normal);
+const miscWorks: data.Work[] = await unifyWorksWithDetail(data.misc);
 ---
 
 <CustomPage
@@ -62,7 +50,14 @@ const miscWorks: Work[] = await unifyWorksWithDetail(data.misc);
     </div>
 
     <ul class="work-list work-list--normal">
-      {normalWorks.map((item) => <WorkItem item={item} />)}
+      {
+        //https://dev.to/cassidoo/passing-markdown-components-to-react-or-preact-in-astro-31ml
+        normalWorks.map((item, i) => (
+          <WorkCard {...item} href={`/works/${item.slug}`}>
+            {item.summary && <Markdown of={item.summary} slot="summary" />}
+          </WorkCard>
+        ))
+      }
     </ul>
 
     <div class="markdown-body">
@@ -72,7 +67,13 @@ const miscWorks: Work[] = await unifyWorksWithDetail(data.misc);
     </div>
 
     <ul class="work-list work-list--misc">
-      {miscWorks.map((item) => <WorkItem item={item} />)}
+      {
+        miscWorks.map((item, i) => (
+          <WorkCard {...item}>
+            {item.summary && <Markdown of={item.summary} slot="summary" />}
+          </WorkCard>
+        ))
+      }
     </ul>
   </div>
 </CustomPage>
@@ -83,5 +84,9 @@ const miscWorks: Work[] = await unifyWorksWithDetail(data.misc);
   @use "media";
 
   .work-list {
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+    margin: 2rem 0;
   }
 </style>
