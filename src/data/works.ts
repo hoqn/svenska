@@ -25,6 +25,22 @@ export function hasDetailedPage(work: Work): work is WorkWithDetailedPage {
 
 const normal = [
   {
+    slug: "hakpl",
+    roles: ["웹 프런트엔드", "기획", "1인"],
+    links: {
+      서비스: "https://hakpl.vercel.app",
+      소스코드: "https://github.com/hoqn/hakpl",
+    },
+    summary: `
+(진행 중)  
+
+이전에 진행했던 안드로이드 앱 학교플러스 서비스의 기능들을 웹으로 구현했어요.  
+기능만 유지되었을 뿐, 완전히 새롭게 디자인하고 개발하였답니다.
+
+\`framer-motion\`을 활용해 자연스러운 애니메이션과 트랜지션을 구현했어요!
+`,
+  },
+  {
     slug: "readiary",
     roles: ["웹 프런트엔드", "기획"],
     links: {
