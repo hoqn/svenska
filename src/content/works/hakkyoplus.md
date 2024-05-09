@@ -1,15 +1,17 @@
 ---
 title: "학교+"
 stacks:
-- Kotlin
-- Android
+  - Kotlin
+  - Android
 start_date: 2020. 03.
 icon: "./hakkyoplus/hakkyoplus__logo.png"
 # icon: "🎁"
+links:
+  "구글 플레이": "https://play.google.com/store/apps/details?id=com.agravic.schoollife"
 ---
 
 > [!info] 정보
-> 
+>
 > 플레이스토어에 출시되어 있어요.  
 > https://play.google.com/store/apps/details?id=com.agravic.schoollife
 
@@ -42,19 +44,19 @@ icon: "./hakkyoplus/hakkyoplus__logo.png"
 안드로이드 네이티브 앱인만큼 Google의 Material Design을 따르도록 디자인하였다.
 
 - **초기 디자인 (Adobe XD)**
-  
-    ![](./hakkyoplus/b2f9046146caa41ece5e7d9ad37606c1e559baba.png)
+
+  ![](./hakkyoplus/b2f9046146caa41ece5e7d9ad37606c1e559baba.png)
 
 - **수정본 (Android)**
-  
+
   ![](./hakkyoplus/6061783593b176765fc64ad200c56e8dccfa4969.png)
 
 - **최종 출시 (Android)**
-  
+
   ![](./hakkyoplus/14c06ee1bd4fcc466c7defbb276d1e2e41572239.png)
 
 - **업데이트(v0.4.0)**
-  
+
   (완료 및 유지보수의 기능 추가 목록 참고 바람)
 
 # 2. 개발 구조
@@ -66,13 +68,13 @@ Android Native로 개발하였고, 언어는 Kotlin을 사용하였다. IDE는 A
 ## 2.2. 메인 네비게이션
 
 - [Bottom Navigation](https://material.io/components/bottom-navigation/android)
-  
-  Material Design의 `Bottom Navigation`을 메인 네비게이션으로 사용하였다. Android Jetpack의 권고에 따르면 [`Navigation Components`](<https://developer.android.com/guide/navigation>)을 이용해 네비게이션을 구현해야 한다. 따라서 처음엔 이를 통해 구현하였으나, 이럴 경우 탐색할 때마다 Fragment가 재생성되어 사용자에게 불편함을 줄 수 있어 단순히 Bottom Navigation의 `setOnItemSelectedListener`로 사용자의 클릭을 인식한 뒤 Fragment를 show/hide만 하는 방법으로 네비게이션을 구성하였다. Navigation Components도 커스텀하면 원하는대로 할 수 있다는 것도 검색을 통해 알게 되었지만, 어차피 앱의 탐색 구조가 단순하기 때문에 Navigation Components의 사용을 포기하였다.
+
+  Material Design의 `Bottom Navigation`을 메인 네비게이션으로 사용하였다. Android Jetpack의 권고에 따르면 [`Navigation Components`](https://developer.android.com/guide/navigation)을 이용해 네비게이션을 구현해야 한다. 따라서 처음엔 이를 통해 구현하였으나, 이럴 경우 탐색할 때마다 Fragment가 재생성되어 사용자에게 불편함을 줄 수 있어 단순히 Bottom Navigation의 `setOnItemSelectedListener`로 사용자의 클릭을 인식한 뒤 Fragment를 show/hide만 하는 방법으로 네비게이션을 구성하였다. Navigation Components도 커스텀하면 원하는대로 할 수 있다는 것도 검색을 통해 알게 되었지만, 어차피 앱의 탐색 구조가 단순하기 때문에 Navigation Components의 사용을 포기하였다.
 
 - 뒤로가기 처리
-  
+
   뒤로가기(Back) 버튼 처리는 기본적으로 홈 화면에서 뒤로가기를 누르면 앱 종료, 홈 화면 외의 화면에서 뒤로가기를 누르면 홈 화면으로 이동하는 구조로 설계하였다.
-  
+
   다만, 한 가지 예외가 있는데, 학사일정 화면에서 월 선택을 하는 부분이 활성화되어 있을 땐 이를
 
 ## 2.3. 홈
@@ -94,11 +96,11 @@ Android Native로 개발하였고, 언어는 Kotlin을 사용하였다. IDE는 A
 급식 기능이 가장 간단했던 부분이다. 데이터의 양도 최대 세 개(아침, 점심, 저녁)로 정해져있으며, API에서 데이터를 받아와 처리해야 하는 부분도 알러지 반응 유발 식품 표시만 해주면 되었다.
 
 - 알러지 유발 식품 표시
-  
+
   NEIS의 API의 정보에선 급식 메뉴 목록 끝에 `숫자.`의 형태로 알러지 정보를 담고 있다. 각각의 숫자는 특정한 알러지 유발 요인을 나타낸다.
-  
+
   따라서 받아온 정보에서 사용자가 설정한 알러지 정보에 해당하는 숫자가 끝에 포함되어 있다면 취소선을 표시하도록 하였다.
-  
+
   ![](./hakkyoplus/image-20220207171737396.png)
 
 ![](./hakkyoplus/image-20220207171829093.png)
@@ -112,33 +114,33 @@ Android Native로 개발하였고, 언어는 Kotlin을 사용하였다. IDE는 A
 이런 이유로 만들다 보니 코드가 꽤나 복잡해지도 방대해져서 중간에 BuddleTimetable이라는 이름으로 별도의 모듈로 독립시켰다. 이 BuddleTimetable의 구조는 아래와 같다.
 
 - **:BuddleTimetable 모듈에서**
-  
+
   - BuddleTimetableView (extends LinearLayout)
-    
+
     : 시간표 기능의 중심이 되는 뷰로서, 시간표를 표시한다.
-    
+
     - HeaderView
-      
+
       : 시간표의 요일을 표시하는 부분을 HeaderView로 따로 구현하였다. 이를 따로 구현한 이유는 Sticky한 HeaderView를 구현하기 위해서이다.
-      
+
       [StickyHeaderView 사진]
-  
+
   - BuddleTimetableData
-    
+
     : 데이터 모델. 자세한 내용은 :app.TimetableData와 같으니 참고바람.
 
 - **:app 모듈에서**
-  
+
   - TimetableContext
-    
+
     : TimetableFragment, TimetableEditActivity, TimetableList 등 다수의 Timetable 관련 기능들끼리 전달받는
-  
+
   - TimetableSimpleData
-    
+
     : 기본적으로 여러 시간표를 저장할 수 있도록 하고 있으므로, 시간표 목록을 불러와야 할 때가 있는데 그 때 사용하는 데이터 모델이다. 시간표의 학기, 이름, ID를 담고 있다. — 이때, ID는 [UUID](https://docs.oracle.com/javase/7/docs/api/java/util/UUID.html)를 랜덤 생성하여 사용하였다.
-  
+
   - TimetableData ← extends :BuddleTimetable.BuddleTimetableData
-    
+
     : 실질적인 시간표의 정보를 저장하는 데이터 모델이다. 시간표의 학기, 이름, ID, 요일 수, 최대 교시 수, 과목 목록, 시간표 셀 데이터 목록을 담고 있다.
 
 데이터의 저장은 :app.TimetableData의 데이터들을 [Gson](https://github.com/google/gson)을 이용해 직렬화하여 [ID].json으로 저장하는 식으로 이루어지며, header.json라는 파일에서 TimetableSimpleData의 목록을 직렬화하여 저장한다. (즉, header.json에 있는 정보로 시간표 목록을 불러오고, 특정 시간표를 불러오기로 결정하면 그때 각각의 [ID].json에 접근한다.)
@@ -154,29 +156,29 @@ Android Native로 개발하였고, 언어는 Kotlin을 사용하였다. IDE는 A
 ## 3.1. 버그 픽스
 
 - **안드로이드 6(M) 이하의 기종에서 학교 검색이 되지 않던 문제**
-  
+
   안드로이드 6 이하에서 한글을 포함한 URL이 제대로 작동하지 않았던 것이 문제였다.
-  
+
   API와의 통신이 GET 방식으로 이루어지다보니, URL에 여러 인수들을 담게 되는데, 국내 API라는 특성상 한글이 들어갈 수밖에 없다. 이때 인코딩 쪽에 문제가 생겨 제대로 작동하지 않았던 것이다.
-  
+
   API를 요청하기 전 URL String에 `URLEncoder.encode(String s, String enc)`을 추가하여 오류를 해결하였다. 특별한 의도가 없다면 `enc`는 `UTF-8`로 하면 된다.
 
 ## 3.2. 기능 추가
 
 - **시간표 테마**
-  
+
   시간표에 테마를 적용할 수 있는 기능을 추가하였다. 테마 기능의 구현을 위한 테마 파일 형식을 json으로 정하였으며, [테마를 만들 수 있는 앱](https://agravic-studios.github.io/hakkyoplusTimetableThemeMaker/)을 간단하게 React.js로 구현하였다.
-  
+
   다만, 사용자가 직접 테마 파일을 등록할 수는 없고, 개발자가 만들어놓은 테마 중에서 선택하는 방식으로 구현하였다. — 테마를 적용할 때 보상 광고를 시청한 뒤 적용되도록 하였다.
 
 - **Material Design 3 적용**
-  
+
   2021년 하반기, Google은 Android 12의 발표와 함께 Material You, Material 3 디자인 가이드라인을 공개하였다.
-  
+
   Material 3 가이드라인에 맞게 디자인을 수정하고 새로운 위젯을 적용하였다.
-  
+
   또한 테마 컬러에도 변화를 주었다.
-  
+
   ![Untitled](https://file.notion.so/f/s/5f811a47-cb72-47ab-9ea3-775889a2c894/Untitled.png?id=7270a83b-1c3b-47e1-be26-f63b9eb0f1e4&table=block&spaceId=32309390-a3b5-40c0-890e-705b6e1b5d38&expirationTimestamp=1699689600000&signature=uxpUYNLE22XRV_AtDXQxkRd_obO03sWyJEMZ1-VUn4Y&downloadName=Untitled.png)
 
 ## 3.3. 앞으로

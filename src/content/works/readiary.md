@@ -9,7 +9,8 @@ start_date: 2023. 09.
 end_date: 2023. 12.
 icon: "📚"
 links:
-  "Source": "https://github.com/hoqn/readiary-fe"
+  "소스코드(FE)": "https://github.com/hoqn/readiary-fe"
+  "소스코드(프로젝트, BE)": "https://github.com/relaxed-mind/book-diary"
 ---
 
 > [!info] 정보

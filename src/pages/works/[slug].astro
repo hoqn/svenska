@@ -24,6 +24,7 @@ const { Content, headings } = await work.render();
     title: work.data.title,
     subtitle: `${work.data.start_date ?? ""} — ${work.data.end_date ?? ""}`,
     icon: work.data.icon,
+    links: work.data.links || undefined,
   }}
 >
   <Content />

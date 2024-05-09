@@ -1,34 +1,10 @@
 "use client";
 
-import LogoGithub from "@/icons/logo-github.svg?raw&react";
-import LogoVercel from "@/icons/logo-vercel.svg?raw&react";
-import LogoGooglePlay from "@/icons/logo-google-playstore.svg?raw&react";
 import type { Work } from "@/data/works";
-import { useMemo, type SVGProps } from "react";
+import { useMemo } from "react";
 
 import $ from "./WorkCard.module.scss";
-
-const LinkIcon = ({
-  url,
-  ...props
-}: {
-  url: string;
-} & SVGProps<SVGSVGElement>) => {
-  const hostname = new URL(url).hostname.replace("www", "");
-
-  if (/github/.test(hostname)) {
-    // return LogoGithub.src;
-    return <LogoGithub {...props} />;
-  } else if (/vercel/.test(hostname)) {
-    // return LogoVercel.src;
-    return <LogoVercel {...props} />;
-  } else if (/^play.google/.test(hostname)) {
-    // return LogoGooglePlay.src;
-    return <LogoGooglePlay {...props} />;
-  } else {
-    return null;
-  }
-};
+import LinkIcon from "../ui/link-icon";
 
 export type Props = Work & { href?: string };
 
@@ -98,10 +74,9 @@ export default function WorkCard({
         <div className={$.links}>
           {Object.entries(links).map(([name, href], i) => (
             <a className={$.link} key={i} href={href}>
-              {/* <LogoGithub /> */}
               <LinkIcon
                 className={$.link__icon}
-                url={href}
+                src={href}
                 width={16}
                 height={16}
               />

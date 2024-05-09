@@ -7,6 +7,9 @@ stacks:
   - TypeScript
   - React
   - Next.js
+links:
+  데모사이트: "https://makeju.vercel.app"
+  소스코드: "https://github.com/hoqn/makeju"
 ---
 
 > [!info] 정보

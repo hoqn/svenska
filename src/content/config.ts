@@ -44,13 +44,15 @@ const serieses = defineCollection({
 
 const works = defineCollection({
   type: "content",
-  schema: ({ image }) => z.object({
-    title: z.string(),
-    stacks: z.array(z.string()).nullish(),
-    start_date: z.date().nullish().or(z.string()),
-    end_date: z.date().nullish().or(z.string()),
-    icon: image().or(z.string()).nullish(),
-  })
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      stacks: z.array(z.string()).nullish(),
+      start_date: z.date().nullish().or(z.string()),
+      end_date: z.date().nullish().or(z.string()),
+      icon: image().or(z.string()).nullish(),
+      links: z.record(z.string(), z.string()).nullish(),
+    }),
 });
 
 export const collections = {

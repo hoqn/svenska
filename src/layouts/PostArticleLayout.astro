@@ -1,8 +1,9 @@
 ---
+import LinkIcon from "@/components/ui/link-icon";
+import { Image } from "astro:assets";
 import { format } from "date-fns";
 import ko from "date-fns/locale/ko/index.js";
 import ScaffoldLayout from "./ScaffoldLayout.astro";
-import { Image } from "astro:assets";
 
 export interface Props {
   header?: {
@@ -12,6 +13,7 @@ export interface Props {
     created_at?: Date | null;
     tags?: string[] | null;
     icon?: string | object | null;
+    links?: Record<string, string>;
   };
 }
 
@@ -85,6 +87,29 @@ const { header } = Astro.props;
               )
             }
           </div>
+
+          {
+            header?.links && Object.keys(header.links).length && (
+              <div class="post-section__links">
+                <ul>
+                  {header?.links &&
+                    Object.entries(header.links).map(([key, value]) => (
+                      <li class="post-section__link">
+                        <span class="post-section__link-key">{key}</span>
+                        <a
+                          class="post-section__link-value"
+                          href={value}
+                          target="_blank"
+                        >
+                          <LinkIcon src={value} width="1em" height="1em" />
+                          <span>{value}</span>
+                        </a>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            )
+          }
         </slot>
       </header>
     </slot>
@@ -179,6 +204,44 @@ const { header } = Astro.props;
 
     &__meta-value {
       color: color.primary(12);
+    }
+
+    &__links {
+      margin-top: 1.5rem;
+      margin-left: -1rem;
+      margin-right: -1rem;
+      margin-bottom: -3rem;
+      padding: 1rem;
+      background-color: color.primary(3);
+    }
+
+    &__link {
+      font-size: 0.875rem;
+
+      & + & {
+        margin-top: 1rem;
+      }
+
+      &-key {
+        font-weight: 600;
+        color: color.neutral(12);
+        margin-right: 0.5rem;
+      }
+
+      &-value {
+        text-wrap: nowrap;
+        font-weight: 400;
+        color: color.primary(11);
+
+        > span {
+          text-decoration: underline;
+        }
+
+        > svg {
+          vertical-align: middle;
+          fill: currentColor;
+        }
+      }
     }
   }
 

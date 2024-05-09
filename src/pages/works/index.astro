@@ -22,6 +22,7 @@ function unifyWorksWithDetail(works: data.Work[]) {
           startDate: detail.data.start_date || undefined,
           endDate: detail.data.end_date || undefined,
           stacks: detail.data.stacks || undefined,
+          links: detail.data.links || undefined,
           ...work,
         } satisfies data.Work;
       } else {
@@ -52,8 +53,13 @@ const miscWorks: data.Work[] = await unifyWorksWithDetail(data.misc);
     <ul class="work-list work-list--normal">
       {
         //https://dev.to/cassidoo/passing-markdown-components-to-react-or-preact-in-astro-31ml
-        normalWorks.map((item, i) => (
-          <WorkCard {...item} href={`/works/${item.slug}`}>
+        normalWorks.map((item) => (
+          <WorkCard
+            {...item}
+            href={
+              data.hasDetailedPage(item) ? `/works/${item.slug}` : undefined
+            }
+          >
             {item.summary && <Markdown of={item.summary} slot="summary" />}
           </WorkCard>
         ))
@@ -68,8 +74,13 @@ const miscWorks: data.Work[] = await unifyWorksWithDetail(data.misc);
 
     <ul class="work-list work-list--misc">
       {
-        miscWorks.map((item, i) => (
-          <WorkCard {...item}>
+        miscWorks.map((item) => (
+          <WorkCard
+            {...item}
+            href={
+              data.hasDetailedPage(item) ? `/works/${item.slug}` : undefined
+            }
+          >
             {item.summary && <Markdown of={item.summary} slot="summary" />}
           </WorkCard>
         ))

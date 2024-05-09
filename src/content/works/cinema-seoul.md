@@ -1,19 +1,22 @@
 ---
 title: "시네마 서울"
 stacks:
-- TypeScript
-- React
-- Vite
+  - TypeScript
+  - React
+  - Vite
 start_date: 2023. 04.
 end_date: 2023. 06.
 icon: "🎞"
+links:
+  "소스코드(FE)": "https://github.com/Cinema-Seoul/cine-seoul-fe"
+  "소스코드(BE)": "https://github.com/cinema-Seoul/cine-seoul-be"
 ---
 
 > [!note] 정보
-> 
+>
 > - BE 소스코드: https://github.com/cinema-Seoul/cine-seoul-be
 > - FE 소스코드: https://github.com/cinema-Seoul/cine-seoul-fe
->   
+>
 >   제가 맡은 파트는 FE예요.
 
 학부 전공 과목 중 설계 과목으로 *데이터베이스설계및실습*이란 과목을 수강하게 되었다. 이름 그대로 데이터베이스를 설계하고 이를 활용한 실습을 해보는 과목이다. 상황은 과목에서 제시되었고, 이를 해결하는 서비스를 개발하는 것이 과제였다.
@@ -42,14 +45,14 @@ icon: "🎞"
 
 - 웹 백엔드: `Java`, `Spring Boot`, `Oracle`
 - **웹 프런트엔드**: `TypeScript` `React` `Vite` `react-router-dom`
-	- 스타일링: `unocss`, `@radix-ui/colors`
-	- 애니메이션: `framer-motion`
-	- 전역 상태: `zustand`
+  - 스타일링: `unocss`, `@radix-ui/colors`
+  - 애니메이션: `framer-motion`
+  - 전역 상태: `zustand`
 - 문서 관리: Google Spreadsheet, Notion, ERDCloud
 
 ## 2.2. 역할과 책임
 
-- 웹 백엔드 개발: 2명  
+- 웹 백엔드 개발: 2명
 - 웹 프런트엔드 개발: **1명** ← 내가 맡은 부분
 - 데이터베이스 설계 및 산출물 작성: **3명** 모두
 
@@ -173,7 +176,7 @@ export function useModal() {
       context.setShowing(true);
       console.log("modal open");
     },
-    [context]
+    [context],
   );
 
   const closeModal = useCallback(() => {

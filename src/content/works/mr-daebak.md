@@ -8,14 +8,17 @@ stacks:
   - Nest.js
   - TypeORM
   - MariaDB
+links:
+  "소스코드(BE)": "https://github.com/hoqn/mrdaebak-backend"
 ---
+
 > [!info] 정보
-> 
+>
 > - BE 레포 깃허브: https://github.com/hoqn/mrdaebak-backend
 
 > 소프트웨어공학 과목을 수강하며 진행한 프로젝트입니다.
 
-> 팀 프로젝트: 3명(**웹 백엔드 1명***, 웹 프런트엔드 2명)
+> 팀 프로젝트: 3명(**웹 백엔드 1명\***, 웹 프런트엔드 2명)
 
 # 1. 프로젝트 소개
 
@@ -32,8 +35,8 @@ stacks:
 #### 개발 환경
 
 - **웹 백엔드**: `TypeScript` `Node.js` `Nest.js` `MariaDB`
-	- ORM: `TypeORM`
-	- 배포: `AWS EC2`
+  - ORM: `TypeORM`
+  - 배포: `AWS EC2`
 - 웹 프런트엔드: `JavaScript` `React` `CRA`
 
 ## 2.2. 역할과 책임
