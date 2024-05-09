@@ -29,7 +29,7 @@ export default defineConfig({
       preprocessorOptions: {
         scss: {
           includePaths: ["./src/styles"],
-        }
+        },
       },
     },
   },
@@ -54,5 +54,12 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkCallouts, remarkMermaid],
+    shikiConfig: {
+      // https://shiki.style/guide/dual-themes#light-dark-dual-themes
+      themes: {
+        light: "one-light",
+        dark: "one-dark-pro",
+      },
+    },
   },
 });

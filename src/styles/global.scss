@@ -1,11 +1,30 @@
 @use "media";
 @use "color";
 
-html {
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+html,
+input,
+textarea,
+button {
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    sans-serif;
 }
 
-html, body {
+html,
+body {
   min-height: 100vh;
 }
 
@@ -63,15 +82,15 @@ a {
   cursor: pointer;
 
   &--opacity {
-    transition: .1s ease-in-out;
+    transition: 0.1s ease-in-out;
     opacity: 1;
     @media screen and (hover: hover) {
       &:hover {
-        opacity: .6;
+        opacity: 0.6;
       }
     }
     &:active {
-      opacity: .25;
+      opacity: 0.25;
     }
   }
 }
@@ -107,8 +126,8 @@ html.is-changing {
 // Markdown Body
 
 .markdown-body {
-  --color-fg-default: color.primary(12) !important;
-  --color-canvas-default: transparent !important;
+  // --color-fg-default: color.primary(12) !important;
+  // --color-canvas-default: transparent !important;
 
   text-align: justify;
 
@@ -124,13 +143,13 @@ html.is-changing {
     font-style: italic;
   }
 
-  img {
-    max-height: 24rem;
-    object-fit: contain;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  // img {
+  //   max-height: 24rem;
+  //   object-fit: contain;
+  //   display: block;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
 }
 
 /** Callout in Markdown body **/
@@ -139,24 +158,29 @@ html.is-changing {
   padding: 1rem;
   border-left: none;
   background-color: rgba(var(--callout-color) / 0.1);
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 
   color: inherit !important;
 
   &.callout-warning {
     --callout-color: 247 107 21;
   }
-  &.callout-info, &.callout-note {
+  &.callout-info,
+  &.callout-note {
     --callout-color: 41 163 131;
   }
-  &.callout-danger, &.callout-error, &.callout-failure, &.callout-fail, &.callout-missing {
+  &.callout-danger,
+  &.callout-error,
+  &.callout-failure,
+  &.callout-fail,
+  &.callout-missing {
     --callout-color: 229 77 46;
   }
 
   .callout-title {
     display: flex;
     flex-flow: row;
-    gap: .25rem;
+    gap: 0.25rem;
     color: rgb(var(--callout-color));
     font-weight: bold;
     align-items: flex-start;

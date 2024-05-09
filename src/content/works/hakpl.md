@@ -59,14 +59,15 @@ links:
 
 아래와 같은 helper 함수를 작성해줬고,
 
-````tsx
+```tsx
 export async function setSchoolSession(values: SchoolSession) {
   cookies().set("school", encodeURIComponent(`${values.regionCode}.${values.code}.${values.name}`), {
     httpOnly: true,
     path: "/",
   });
   cookies().delete("class");
-}```
+}
+```
 
 아래와 같은 context provider와 hook을 작성해 클라이언트에서도 접근할 수 있도록 하였다.
 
