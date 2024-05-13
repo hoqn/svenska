@@ -23,6 +23,12 @@ links:
 
 > 컴퓨터과학 종합설계를 수강하며 진행한 프로젝트입니다.
 
+<p style="text-align: center;">
+  <video style="max-height: 480px;" controls>
+    <source src="./readiary/readiary-demo.webm" type="video/webm">
+  </video>
+</p>
+
 ### 목차
 
 학부 졸업을 앞두고 종합설계 과목을 수강하게 되었다. 별도의 강의 내용은 없고, 종합설계를 진행하며 매주 진행 상황과 성과를 발표하고 피드백 받는 과정이 주가 되는 과목이었다. 한편, 우리 팀은 4명으로 구성된 팀이었고, 실제 서비스 개발에서는 웹 프런트엔드 개발을 주로 담당하게 되었다.
