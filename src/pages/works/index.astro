@@ -43,11 +43,16 @@ const miscWorks: data.Work[] = await unifyWorksWithDetail(data.misc);
 >
   <div slot="markdown-body::before">
     <div class="markdown-body">
-      <Markdown
-        of={`
-> \\* 표시는 제가 맡은 역할을 뜻해요
-    `}
-      />
+      <Markdown of={``} />
+      <div style="background-color: var(--grass9); color: var(--grass1); padding: 1rem;">
+        <strong>
+          죄송합니다.<br />이 페이지는
+          <a style="color: inherit; text-decoration: underline;"href="https://hoqn.notion.site/8a92985f1b1946f485e0969146f4b3b4"
+            >여기</a
+          >로 이전하고 있어요. 
+          <!-- 앞선 링크를 공식 포트폴리오로 생각해주시면 정말 감사드리겠습니다. -->
+        </strong>
+      </div>
     </div>
 
     <ul class="work-list work-list--normal">
