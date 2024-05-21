@@ -1,5 +1,4 @@
 ---
-
 type Variant = "contained" | "tonal" | "text";
 type Tint = "primary" | "neutral";
 
@@ -10,12 +9,7 @@ export interface Props extends astroHTML.JSX.HTMLAttributes {
   iconEnd?: Function;
 }
 
-const {
-  variant,
-  tint,
-  class: className,
-  ...restProps
-} = Astro.props;
+const { variant, tint, class: className, ...restProps } = Astro.props;
 
 let iconStart = restProps.iconStart;
 let iconEnd = restProps.iconEnd;
@@ -29,17 +23,14 @@ if (iconStart && iconEnd) {
 }
 ---
 
-<button class:list={[`button button--${variant} button--${tint}`, className]} {...restProps}>
-  {
-    iconCenter && (<i class="button__icon button__icon--center">{iconCenter}</i>)
-  }
-  {
-    iconStart && (<i class="button__icon button__icon--start">{iconStart}</i>)
-  }
+<button
+  class:list={[`button button--${variant} button--${tint}`, className]}
+  {...restProps}
+>
+  {iconCenter && <i class="button__icon button__icon--center">{iconCenter}</i>}
+  {iconStart && <i class="button__icon button__icon--start">{iconStart}</i>}
   <span class="button__label"><slot /></span>
-  {
-    iconEnd && (<i class="button__icon button__icon--end">{iconEnd}</i>)
-  }
+  {iconEnd && <i class="button__icon button__icon--end">{iconEnd}</i>}
 </button>
 
 <style lang="scss">
@@ -130,7 +121,7 @@ if (iconStart && iconEnd) {
   .button,
   .button__label {
     display: inline;
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 600;
     line-height: 1.25rem;
   }
