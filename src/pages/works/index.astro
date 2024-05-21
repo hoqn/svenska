@@ -34,14 +34,16 @@ function unifyWorksWithDetail(works: data.Work[]) {
 
 const normalWorks: data.Work[] = await unifyWorksWithDetail(data.normal);
 const miscWorks: data.Work[] = await unifyWorksWithDetail(data.misc);
+
+// Migration
+import PortfolioMigrationAlert from "./_migration";
 ---
 
 <CustomPage
-  frontmatter={{
-    title: "프로젝트",
-  }}
->
-  <div slot="markdown-body::before">
+frontmatter={{
+  title: "프로젝트",
+}}>
+<div slot="markdown-body::before">
     <div class="markdown-body">
       <Markdown of={``} />
       <div style="background-color: var(--grass9); color: var(--grass1); padding: 1rem;">
@@ -93,6 +95,7 @@ const miscWorks: data.Work[] = await unifyWorksWithDetail(data.misc);
     </ul>
   </div>
 </CustomPage>
+<PortfolioMigrationAlert client:load />
 
 <style lang="scss">
   @use "color";
