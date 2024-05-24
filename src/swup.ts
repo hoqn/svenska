@@ -3,7 +3,6 @@ import SwupA11yPlugin from "@swup/a11y-plugin";
 import SwupHeadPlugin from "@swup/head-plugin";
 import SwupProgressPlugin from "@swup/progress-plugin";
 import SwupScrollPlugin from "@swup/scroll-plugin";
-import SwupSlideTheme from "@swup/slide-theme";
 
 const swup = new Swup({
   plugins: [
@@ -11,6 +10,9 @@ const swup = new Swup({
     new SwupHeadPlugin(),
     new SwupProgressPlugin(),
     new SwupScrollPlugin(),
-    new SwupSlideTheme(),
-  ]
+  ],
+  containers: ["#swup"]
 });
+
+// @ts-ignore
+window.swup = swup;

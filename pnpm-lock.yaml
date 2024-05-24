@@ -72,9 +72,6 @@ importers:
       '@swup/a11y-plugin':
         specifier: ^5.0.0
         version: 5.0.0(swup@4.6.1)
-      '@swup/fade-theme':
-        specifier: ^1.0.5
-        version: 1.0.5
       '@swup/head-plugin':
         specifier: ^2.2.0
         version: 2.2.0(swup@4.6.1)
@@ -84,9 +81,6 @@ importers:
       '@swup/scroll-plugin':
         specifier: ^3.3.2
         version: 3.3.2(swup@4.6.1)
-      '@swup/slide-theme':
-        specifier: ^1.0.5
-        version: 1.0.5
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -1499,9 +1493,6 @@ packages:
     peerDependencies:
       swup: ^4.0.0
 
-  '@swup/fade-theme@1.0.5':
-    resolution: {integrity: sha512-9PwC7UmW0RZ5eda+JtWz0z0H3kWWW4Ir3fnEnQOLwdS5p+nrvrLGQM3WjUR/kFIuAsU6K40Ty99gtoW6spWYSA==}
-
   '@swup/fade-theme@2.0.0':
     resolution: {integrity: sha512-gMbrGZyKwkuBop69Ih/GQmQXFw4PxWIOzzIumij7KSH6n4HflgqhEk7RcdCELl4lpAiGJJYGsdVlVVtIRBvcQA==}
     peerDependencies:
@@ -1562,16 +1553,10 @@ packages:
     peerDependencies:
       swup: ^4.2.0
 
-  '@swup/slide-theme@1.0.5':
-    resolution: {integrity: sha512-0xxqtURSMDScjLMRdNjtxzo8NGCPcmp6VXrQcxIQzQDSAvwNnP8Zw871C+FSL1EMe8OhAzWAP3E3x9vzH+iLHg==}
-
   '@swup/slide-theme@2.0.0':
     resolution: {integrity: sha512-TFIHLY1uVjzHQ6BMKyroTkxNck3z4t38VSzK/3HZRHXblAraL/h+Sb+Omszsloe+5j0w2oWo7Ca/UsXNwec53A==}
     peerDependencies:
       swup: ^4.0.0
-
-  '@swup/theme@1.0.7':
-    resolution: {integrity: sha512-OINEaf34fYs90l7/YUUKfOf+paY7/FDhOBLwYxrD0w1OjBiItZpw3N+ATA/QklJwmoUu3KkDFOaQG0zT4KxmmA==}
 
   '@swup/theme@2.1.0':
     resolution: {integrity: sha512-nwAzx+GYySIYs6uSCFYGNdpLWv2z/mEryRD1gvmIqsaSP2N7sVd4mKAboraJAzIzbasRhTsTQzyN1LfLeti3AA==}
@@ -6156,10 +6141,6 @@ snapshots:
       '@swup/plugin': 4.0.0
       swup: 4.6.1
 
-  '@swup/fade-theme@1.0.5':
-    dependencies:
-      '@swup/theme': 1.0.7
-
   '@swup/fade-theme@2.0.0(@types/babel__core@7.20.5)(swup@4.6.1)':
     dependencies:
       '@swup/plugin': 3.0.1(@types/babel__core@7.20.5)
@@ -6250,10 +6231,6 @@ snapshots:
       scrl: 2.0.0
       swup: 4.6.1
 
-  '@swup/slide-theme@1.0.5':
-    dependencies:
-      '@swup/theme': 1.0.7
-
   '@swup/slide-theme@2.0.0(@types/babel__core@7.20.5)(swup@4.6.1)':
     dependencies:
       '@swup/plugin': 3.0.1(@types/babel__core@7.20.5)
@@ -6263,8 +6240,6 @@ snapshots:
       - '@types/babel__core'
       - supports-color
       - ts-node
-
-  '@swup/theme@1.0.7': {}
 
   '@swup/theme@2.1.0(swup@4.6.1)':
     dependencies:

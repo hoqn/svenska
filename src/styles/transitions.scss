@@ -1,0 +1,18 @@
+// Swup의 동작에 맞춰 작성한 트랜지션 애니메이션 스타일
+// https://swup.js.org/getting-started/animations/
+
+.transition-main {
+  html.is-changing & {
+    transition: 250ms ease-out;
+    transition-property: opacity, transform;
+  }
+  html.is-animating & {
+    opacity: 0;
+    transform: translateY(24px) translateZ(0);
+  }
+  html.is-leaving & {
+    transition: 250ms ease-in;
+    transition-property: opacity, transform;
+    transform: translateY(-24px) translateZ(0);
+  }
+}
