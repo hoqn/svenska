@@ -1,0 +1,34 @@
+@keyframes transition-main--in {
+  from {
+    transform-origin: top center;
+    opacity: 0;
+    transform: scaleX(0.96) scaleY(0.96) scaleZ(0);
+  }
+  to {
+    transform-origin: top center;
+  }
+}
+
+@keyframes transition-main--out {
+  from {
+    transform-origin: top center;
+  }
+  to {
+    transform-origin: top center;
+    opacity: 0;
+    transform: scaleX(0.96) scaleY(0.96) scaleZ(0);
+  }
+}
+/* @keyframes transition-main--in {
+  from {
+    opacity: 0;
+    transform: translateY(+24px) translateZ(0);
+  }
+}
+
+@keyframes transition-main--out {
+  to {
+    opacity: 0;
+    transform: translateY(-24px) translateZ(0);
+  }
+} */

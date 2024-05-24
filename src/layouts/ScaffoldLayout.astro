@@ -4,6 +4,8 @@ import BaseLayout from "./BaseLayout.astro";
 
 import type { SiteMeta } from "hoqn";
 import MainHeader from "@/components/MainHeader.astro";
+import { mainTransitionAnim } from "@/anims/transition";
+import { slide } from "astro:transitions";
 
 export interface Props {
   lang?: string;
@@ -19,7 +21,7 @@ const { meta, lang } = Astro.props;
     <MainHeader />
   </slot>
   {/* CONTENT */}
-  <main class="main">
+  <main class="main" transition:name="main" transition:animate={mainTransitionAnim}>
     <slot />
   </main>
   {/* FOOTER */}
