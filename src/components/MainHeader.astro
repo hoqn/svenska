@@ -17,7 +17,7 @@ const menuItems: { label: string; href: string }[] = [
 const pathname = Astro.url.pathname;
 ---
 
-<header class="main-header" transition:animate="none">
+<header class="main-header">
   <div class="main-header__inner container">
     <input type="checkbox" id="menu-handle" class="menu-handle__input" hidden />
     {/* Floating */}
@@ -107,7 +107,6 @@ const pathname = Astro.url.pathname;
       bottom: 0;
       left: 0;
       right: 0;
-      transition: background-color 0.2s ease-in;
       background-color: var(--html-bg);
       opacity: 0.8;
       z-index: -1;
