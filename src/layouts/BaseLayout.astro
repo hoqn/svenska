@@ -4,8 +4,12 @@ import "@/styles/reset.css";
 import "@/styles/global.scss";
 import "@/styles/h-grid.scss";
 
+// transition api
+import "@/anims/transition.css";
+
 import { defaultSiteMeta } from "@/data/site";
 import type { SiteMeta } from "hoqn";
+import { ViewTransitions } from "astro:transitions";
 
 export interface Props {
   lang?: string;
@@ -19,8 +23,6 @@ const meta: SiteMeta = {
 };
 ---
 
-<script src="../swup" />
-
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
@@ -32,14 +34,22 @@ const meta: SiteMeta = {
     <title>{meta.title}</title>
     <script is:inline>
       (() => {
-        var v = localStorage.getItem("color-scheme");
-        if (
-          v === "dark" ||
-          (v === null &&
-            window.matchMedia("prefers-color-scheme: dark").matches)
-        ) {
-          document.documentElement.classList.add("dark-theme");
-        }
+        const initScheme = () => {
+          const v = localStorage.getItem("color-scheme");
+
+          if (
+            v === "dark" ||
+            (v === null &&
+              window.matchMedia("prefers-color-scheme: dark").matches)
+          ) {
+            document.documentElement.classList.add("dark-theme");
+          }
+        };
+
+        initScheme();
+
+        // view transition을 사용하는 환경에서도 제대로 작동하도록
+        document.addEventListener("astro:after-swap", initScheme);
       })();
     </script>
     <link
@@ -49,6 +59,7 @@ const meta: SiteMeta = {
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
     />
     <!-- <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" /> -->
+    <ViewTransitions fallback="animate" />
   </head>
   <body>
     <slot />

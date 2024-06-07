@@ -16,28 +16,25 @@ import Button from "./ui/button/button.astro";
   <span class="color-scheme-btn__label--dark">{t("app.colorscheme.dark")}</span>
 </Button>
 
-<script>
-  const button = document.getElementById("color-scheme-btn");
+<script is:inline data-astro-rerun>
+  (() => {
+    const button = document.getElementById("color-scheme-btn");
 
-  button?.addEventListener("click", function (e) {
-    e.preventDefault();
-    if (window.localStorage) {
-      let value = document.documentElement.classList.contains("dark-theme")
-        ? "light"
-        : "dark";
+    button?.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (window.localStorage) {
+        let value = document.documentElement.classList.contains("dark-theme")
+          ? "light"
+          : "dark";
 
-      window.localStorage.setItem("color-scheme", value);
+        window.localStorage.setItem("color-scheme", value);
 
-      // let current = window.localStorage.getItem("color-scheme");
-
-      // if (current === null)
-      //   current = window.matchMedia("prefers-color-scheme: dark").matches ? "dark" : "light";
-
-      if (value === "dark")
-        document.documentElement.classList.add("dark-theme");
-      else document.documentElement.classList.remove("dark-theme");
-    }
-  });
+        if (value === "dark")
+          document.documentElement.classList.add("dark-theme");
+        else document.documentElement.classList.remove("dark-theme");
+      }
+    });
+  })();
 </script>
 
 <style lang="scss">

@@ -95,16 +95,6 @@ a {
   }
 }
 
-// Swup
-
-.swup-progress-bar {
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  height: 8px;
-  background-color: color.primary(5);
-}
-
 html.is-changing {
   overflow-y: hidden;
 }
