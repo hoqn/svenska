@@ -22,6 +22,19 @@ export default function PortfolioMigrationAlert() {
     }, 1000);
   }, []);
 
+  useEffect(() => {
+    const handler = (ev: KeyboardEvent) => {
+      if (ev.key === "Escape") {
+        clearInterval(intervalHandle.current);
+        setOpen(false);
+      }
+    };
+
+    window.document.addEventListener("keydown", handler);
+
+    return () => void window.document.removeEventListener("keydown", handler);
+  }, []);
+
   if (!open) return null;
 
   return (
