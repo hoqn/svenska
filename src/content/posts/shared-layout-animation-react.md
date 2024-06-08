@@ -2,6 +2,9 @@
 title: React에서 자연스러운 Shared Layout 애니메이션을 구현하기
 subtitle: w/ framer-motion
 series: animation-hoqn
+tags:
+  - react
+  - framer-motion
 created_at: 2024-06-05
 edited_at: 2024-06-07
 ---
@@ -9,7 +12,7 @@ edited_at: 2024-06-07
 
 바쁘신 분들을 위해, 먼저 내가 만들어낸 작업물을 보이고 글을 시작하고자 한다. 직접 인터랙션할 수 있다.
 
-<iframe width="100%" height="500px" src="https://anim-smodal.vercel.app" scrolling="no" frameborder="0"></iframe>
+<iframe width="100%" height="500px" src="https://hoqn.github.io/anim/shared-layout-modal/" scrolling="no" frameborder="0"></iframe>
 
 ## 머리말
 
