@@ -1,0 +1,182 @@
+{
+  "main": {
+    "id": "695def98c1eb559a",
+    "type": "split",
+    "children": [
+      {
+        "id": "d69de244d5e9b86d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2cd32d16f8d02879",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/shared-layout-animation-react.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "90a158c3d7c0599d",
+    "type": "split",
+    "children": [
+      {
+        "id": "83a69c4faafe1674",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "20d3eafda971a120",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "945311d4f45f10cf",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "18eb300248832228",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 245.5
+  },
+  "right": {
+    "id": "73ef3b2f69258366",
+    "type": "split",
+    "children": [
+      {
+        "id": "e33f7b182ca9ec65",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cc6408bf1da36b05",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "posts/shared-layout-animation-react.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1dea5ed798339e92",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "posts/shared-layout-animation-react.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "fb9879ffb85590d0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "b7ebe141ef591a49",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "posts/shared-layout-animation-react.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:퀵 스위처 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 데일리 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false
+    }
+  },
+  "active": "2cd32d16f8d02879",
+  "lastOpenFiles": [
+    "posts/shared-layout-animation-react/A0270B7F12BB01A994E10E2F8377E9EB.gif",
+    "posts/shared-layout-animation-react/23AE8F027C6743232112D645BF58D8C5.gif",
+    "posts/shared-layout-animation-react/02A62F3DC23EB600D730E80B63EBF7BD.png",
+    "posts/shared-layout-animation-react/B1E6AF66F3C203E8867FEDB853BBBFFF.gif",
+    "posts/shared-layout-animation-react/4F03D127702B439CF550A11BEAFD3CD8.gif",
+    "posts/shared-layout-animation-react/C03D22D48BA16188DC1A46E0A7BC507D.gif",
+    "posts/shared-layout-animation-react.md",
+    "serieses/animation-hoqn.md",
+    "serieses/project-readiary.md",
+    "serieses/project-hakkyoplus.md",
+    "posts/shared-layout-animation-react/화면 기록 2024-06-05 오전 1.59.05.mov",
+    "posts/shared-layout-animation-react/화면 기록 2024-06-05 오전 2.07.36.mov",
+    "posts/shared-layout-animation-react/화면 기록 2024-06-05 오전 2.11.27.mov",
+    "posts/shared-layout-animation-react/화면 기록 2024-06-05 오전 2.15.32.mov",
+    "posts/shared-layout-animation-react/화면 기록 2024-06-05 오전 2.49.56.mov",
+    "posts/shared-layout-animation-react/화면 기록 2024-06-05 오전 3.11.58.mov",
+    "posts/shared-layout-animation-react/화면 기록 2024-06-05 오후 2.10.45.mov",
+    "posts/shared-layout-animation-react/화면 기록 2024-06-05 오전 1.57.16.mov",
+    "posts/shared-layout-animation-react/9126F3DA58257B97134FEF22C4D676F1.png",
+    "posts/shared-layout-animation-react/C03D22D48BA16188DC1A46E0A7BC507D-1.gif",
+    "works/cinema-seoul.md",
+    "posts/shared-layout-animation-react",
+    "posts/posts",
+    "posts/attatch/emil-kowalski-anim.gif",
+    "posts/shared-layout-animation-react/emil-kowalski-anim.gif",
+    "posts/무제 파일.md",
+    "posts/better-view-transition-api.md",
+    "무제 파일.md",
+    "posts/web-view-transition-api.md",
+    "posts/android-urlencoding-hangul.md"
+  ]
+}
