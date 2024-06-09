@@ -26,6 +26,14 @@ const locale = staticI18n(Astro.url.pathname);
       <div class="content-box__left">
         <Greeting className="content-box__title" />
         <h4 class="content-box__subtitle">Web FE Developer</h4>
+        <!-- Links -->
+        <div class="content-box__links">
+          <a class="content-box__link" href="/post">블로그 글 보기</a>
+          <a class="content-box__link" href="https://portfolio.hoqn.dev"
+            >포트폴리오 보기</a
+          >
+          <a class="content-box__link" href="https://github.com/hoqn">Github</a>
+        </div>
       </div>
       <div class="content-box__right">
         <div class="content-box__profile-img">
@@ -158,6 +166,39 @@ const locale = staticI18n(Astro.url.pathname);
       // 		background-blend-mode: darken;
       // 	}
       // }
+    }
+
+    &__links {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    &__link {
+      padding: 0.5rem 1rem;
+      color: white;
+      background-color: color.primary(9);
+      border: 1px solid color.primary(9);
+      border-radius: 0.25rem;
+      font-weight: 600;
+      font-size: 0.875em;
+
+      white-space: nowrap;
+      transition: 0.12s ease-in;
+
+      &:hover {
+        background-color: color.primary(10);
+        border-color: color.primary(10);
+      }
+
+      &:active {
+        background-color: color.primary(10);
+        border-color: color.primary(10);
+        filter: brightness(0.92) saturate(1.1);
+        transform: scale3d(0.98, 0.98, 1);
+      }
     }
   }
 
