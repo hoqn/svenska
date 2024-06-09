@@ -6,7 +6,7 @@ $raw-colors: (
 );
 
 @function get-color($name, $scale) {
-  @return var(--#{map.get($raw-colors, $name)}#{$scale});
+  @return var(--#{map.get($raw-colors, $name)}-#{$scale});
 }
 
 @function primary($scale) {
