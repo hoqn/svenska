@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import { format } from "date-fns";
 import ko from "date-fns/locale/ko/index.js";
 import ScaffoldLayout from "./ScaffoldLayout.astro";
+import { getEntry } from "astro:content";
 
 export interface Props {
   header?: {
@@ -14,10 +15,15 @@ export interface Props {
     tags?: string[] | null;
     icon?: string | object | null;
     links?: Record<string, string>;
+    series?: string;
   };
 }
 
 const { header } = Astro.props;
+
+const series =
+  header?.series &&
+  (await getEntry({ collection: "serieses", slug: header.series }));
 ---
 
 <ScaffoldLayout
@@ -29,6 +35,19 @@ const { header } = Astro.props;
     <slot name="header-wrapper">
       <header class="post-section__header container">
         <slot name="header">
+          <!-- Series -->
+          {
+            series && (
+              <div class="post-section__series-container">
+                <a
+                  class="post-section__series pressable pressable--opacity"
+                  href={`/series/${series.slug}`}
+                >
+                  {series.data.title}
+                </a>
+              </div>
+            )
+          }
           {
             header?.icon && (
               <div class="post-section__header-icon">
@@ -161,20 +180,38 @@ const { header } = Astro.props;
       color: color.neutral(11);
     }
 
+    &__series-container {
+      margin-bottom: 1.5rem;
+    }
+
+    &__series {
+      padding: 0.125rem 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: color.neutral(11);
+      border: 1px solid color.neutral(6);
+      border-radius: 0.25rem;
+
+      &::after {
+        content: "\f045"; // rightChevron @ Pretendard
+        margin-left: 0.25rem;
+      }
+    }
+
     &__tags {
       display: flex;
       flex-flow: row wrap;
       margin-top: 1.5rem;
-      gap: .5rem;
+      gap: 0.5rem;
     }
 
     &__tag {
       display: inline;
       font-size: 0.875rem;
-      padding: 0.25rem 0.5rem;
+      padding: 0.25rem 0.25rem;
       background-color: color.neutral(3);
       color: color.neutral(11);
-      border-radius: 9999px;
+      border-radius: 0.25rem;
 
       > a {
         &::before {
