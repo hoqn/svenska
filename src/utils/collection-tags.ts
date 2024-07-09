@@ -1,10 +1,12 @@
 import { getCollection } from "astro:content";
 
 export async function getPostTagCollection(): Promise<string[]> {
-  const postsWithTags = await getCollection("posts", ({ data: { tags } }) => !!tags && tags.length);
+  const postsWithTags = await getCollection("posts", it => it.data.tags);
 
-  const ret = new Set<string>();
-  postsWithTags.forEach(({ data: { tags } }) => (!!tags && tags.length) && tags.forEach((tag) => ret.add(tag)));
+  const set = new Set<string>(postsWithTags.flatMap<string>(it => it.data.tags as string[]));
 
-  return Array.from(ret);
+  const arr = [...set];
+  arr.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : +1);
+
+  return arr;
 }
