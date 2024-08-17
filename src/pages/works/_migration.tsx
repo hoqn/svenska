@@ -7,6 +7,11 @@ export default function PortfolioMigrationAlert() {
   const time = useRef<number>(3);
   const intervalHandle = useRef<NodeJS.Timeout>();
 
+  const stopAll = () => {
+    clearInterval(intervalHandle.current);
+    setOpen(false);
+  }
+
   useEffect(() => {
     intervalHandle.current = setInterval(() => {
       time.current--;
@@ -20,6 +25,12 @@ export default function PortfolioMigrationAlert() {
           "https://hoqn.notion.site/8a92985f1b1946f485e0969146f4b3b4";
       }
     }, 1000);
+
+    window.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape" && open) {
+        stopAll();
+      }
+    });
   }, []);
 
   useEffect(() => {

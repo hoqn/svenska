@@ -7,6 +7,9 @@ import { getEntry } from "astro:content";
 import * as data from "@/data/works";
 import WorkCard from "@/components/work/WorkCard";
 
+// * REDIRECT
+return Astro.redirect("https://portfolio.hoqn.dev");
+
 function unifyWorksWithDetail(works: data.Work[]) {
   return Promise.all(
     works.map(async (work) => {
