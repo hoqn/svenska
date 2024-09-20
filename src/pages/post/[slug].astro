@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import format from 'date-fns/format/index';
-import ko from 'date-fns/locale/ko/index';
+import format from "date-fns/format/index";
+import ko from "date-fns/locale/ko/index";
 import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
 
 import type { GetStaticPaths } from "astro";
@@ -25,13 +25,16 @@ const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 ---
 
-<PostArticleLayout header={{
-  title: entry.data.title,
-  subtitle: entry.data.subtitle,
-  created_at: entry.data.created_at,
-  edited_at: entry.data.edited_at,
-  tags: entry.data.tags,
-  series: entry.data.series?.slug,
-}}>
+<PostArticleLayout
+  header={{
+    title: entry.data.title,
+    subtitle: entry.data.subtitle,
+    created_at: entry.data.created_at,
+    edited_at: entry.data.edited_at,
+    tags: entry.data.tags,
+    series: entry.data.series?.slug,
+  }}
+  hasComment={true}
+>
   <Content />
 </PostArticleLayout>

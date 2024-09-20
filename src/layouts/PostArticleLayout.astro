@@ -17,9 +17,10 @@ export interface Props {
     links?: Record<string, string>;
     series?: string;
   };
+  hasComment?: boolean;
 }
 
-const { header } = Astro.props;
+const { header, hasComment = false } = Astro.props;
 
 const series =
   header?.series &&
@@ -139,11 +140,46 @@ const series =
         </div>
       </article>
     </slot>
+    <slot name="comment-wrapper">
+      {
+        hasComment && (
+          <>
+            <section class="light:hidden">
+              <script
+                src="https://utteranc.es/client.js"
+                repo="hoqn/svenska"
+                issue-term="pathname"
+                label="💬"
+                theme="github-dark"
+                crossorigin="anonymous"
+                async
+              />
+            </section>
+            <section class="dark:hidden">
+              <script
+                src="https://utteranc.es/client.js"
+                repo="hoqn/svenska"
+                issue-term="pathname"
+                label="💬"
+                theme="github-light"
+                crossorigin="anonymous"
+                async
+              />
+            </section>
+          </>
+        )
+      }
+    </slot>
   </section>
 </ScaffoldLayout>
 
 <style lang="scss">
   @use "color";
+
+  html:not(.dark-theme) .light\:hidden,
+  html.dark-theme .dark\:hidden {
+    display: none;
+  }
 
   :root {
     --html-bg: #{color.neutral(1)} !important;
