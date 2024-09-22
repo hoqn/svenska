@@ -1,6 +1,7 @@
 ---
 title: "Toss Accelerator, 그리고 인터뷰 진행까지"
 created_at: 2024-09-20
+draft: true
 ---
 
 정말 감사히도(또는 과분하게도), 토스에서 면접을 진행할 수 있는 기회를 얻었었다.
