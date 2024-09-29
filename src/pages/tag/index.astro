@@ -10,7 +10,7 @@ const tags = await getPostTagCollection();
     {
       tags.map((tag) => (
         <li class="tag-list__item">
-          <a class="pressable pressable--opacity" href={`/tag/${tag}`}>
+          <a class="pressable pressable--opacity" href={`/tag/${tag.toLowerCase()}`}>
             {tag}
           </a>
         </li>

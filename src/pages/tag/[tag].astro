@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import format from 'date-fns/format/index';
-import ko from 'date-fns/locale/ko/index';
+import format from "date-fns/format/index";
+import ko from "date-fns/locale/ko/index";
 import ScaffoldLayout from "@/layouts/ScaffoldLayout.astro";
 
 import type { GetStaticPaths } from "astro";
@@ -12,10 +12,15 @@ import PostList from "@/components/post/post-list.astro";
 
 export const getStaticPaths: GetStaticPaths = async function () {
   const tags = await getPostTagCollection();
-  return tags.map((tag) => ({
-    params: { tag },
-    props: { tag }
-  }));
+  return tags.map((tag) => {
+    // url에서는 무조건 lowercase만 사용하기로
+    // TODO: case insensitve
+    const _tag = tag.toLowerCase();
+    return {
+      params: { tag: _tag },
+      props: { tag },
+    };
+  });
 };
 
 export interface Props {
@@ -24,11 +29,22 @@ export interface Props {
 
 const { tag } = Astro.props;
 
-const posts = await getCollection("posts", ({ data: { tags, draft } }) => (!!tags && tags.length) && tags.includes(tag) && (import.meta.env.PROD ? !draft : true) );
+function hasTag(tags: string[] | null | undefined, searchTag: string) {
+  if (!tags) {
+    return false;
+  }
+
+  return tags.some((tag) => tag.toLowerCase() === searchTag.toLowerCase());
+}
+
+const posts = await getCollection(
+  "posts",
+  ({ data: { tags, draft } }) =>
+    hasTag(tags, tag) && (import.meta.env.PROD ? !draft : true),
+);
 ---
 
 <ListScaffoldLayout currentShowType="tag">
   <Fragment slot="header-title">#{tag}</Fragment>
   <PostList {posts} />
 </ListScaffoldLayout>
-

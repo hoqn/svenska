@@ -8,5 +8,14 @@ export async function getPostTagCollection(): Promise<string[]> {
   const arr = [...set];
   arr.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : +1);
 
-  return arr;
+  // 'react'와 'React'처럼 대소문자만 차이날 경우 하나로 합침
+  return arr.reduce((acc, it) => {
+    const last = acc[acc.length - 1];
+
+    if (last && last.toLowerCase() === it.toLowerCase()) {
+      return acc;
+    }
+
+    return [...acc, it];
+  }, [] as typeof arr);
 }

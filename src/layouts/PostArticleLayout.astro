@@ -78,7 +78,7 @@ const series =
               <ul class="post-section__tags">
                 {header.tags.map((tag) => (
                   <li class="post-section__tag">
-                    <a href={`/tag/${tag}`}>{tag}</a>
+                    <a href={`/tag/${tag.toLowerCase()}`}>{tag}</a>
                   </li>
                 ))}
               </ul>

@@ -49,7 +49,7 @@ const series = data.series && (await getEntry(data.series));
           <li class="list-item__tag">
             <a
               class="list-item__tag-link pressable pressable--opacity"
-              href={`/tag/${tag}`}
+              href={`/tag/${tag.toLowerCase()}`}
             >
               {tag}
             </a>
