@@ -29,14 +29,14 @@
   // --color-canvas-subtle: transparent;
   --color-border-default: #{color.neutral(6)};
   --color-border-muted: #{color.neutral(7)};
-  // --color-neutral-muted: rgba(110, 118, 129, 0.4);
+  --color-neutral-muted: #{color.primary(3)};
 }
 
 .dark-theme .markdown-body {
   /*dark*/
   color-scheme: dark;
   --color-canvas-subtle: rgba(255, 255, 255, 0.15);
-  --color-neutral-muted: rgba(255, 255, 255, 0.15);
+  // --color-neutral-muted: rgba(255, 255, 255, 0.15);
   // --color-fg-default: #e6edf3;
   // --color-fg-muted: #848d97;
   // --color-fg-subtle: #6e7681;
@@ -64,7 +64,7 @@
   /*light*/
   color-scheme: light;
   --color-canvas-subtle: rgba(124, 124, 124, 0.16);
-  --color-neutral-muted: rgba(124, 124, 124, 0.16);
+  // --color-neutral-muted: rgba(124, 124, 124, 0.16);
   // --color-fg-default: #1f2328;
   // --color-fg-muted: #656d76;
   // --color-fg-subtle: #6e7781;
@@ -98,7 +98,7 @@
   //   Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-family: inherit;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.65;
   word-wrap: break-word;
 }
 
@@ -159,11 +159,8 @@
 }
 
 .markdown-body h1 {
-  margin: 0.67em 0;
   font-weight: var(--base-text-weight-semibold, 600);
-  padding-bottom: 0.3em;
   font-size: 2em;
-  border-bottom: 1px solid var(--color-border-muted);
 }
 
 .markdown-body mark {
@@ -380,17 +377,15 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-  margin-top: 24px;
-  margin-bottom: 16px;
+  margin-top: 0.5rem;
+  padding-bottom: 2rem;
   font-weight: var(--base-text-weight-semibold, 600);
   line-height: 1.25;
 }
 
 .markdown-body h2 {
   font-weight: var(--base-text-weight-semibold, 600);
-  padding-bottom: 0.3em;
   font-size: 1.5em;
-  border-bottom: 1px solid var(--color-border-muted);
 }
 
 .markdown-body h3 {
@@ -416,11 +411,12 @@
 
 .markdown-body p {
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 32px;
 }
 
 .markdown-body blockquote {
   margin: 0;
+  margin-bottom: 2rem;
   padding: 0 1em;
   color: var(--color-fg-muted);
   border-left: 0.25em solid var(--color-border-default);
@@ -428,8 +424,8 @@
 
 .markdown-body ul,
 .markdown-body ol {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   padding-left: 2em;
 }
 
@@ -465,7 +461,7 @@
 
 .markdown-body pre {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 2rem;
   font-family:
     ui-monospace,
     SFMono-Regular,
@@ -533,18 +529,6 @@
 
 .markdown-body .anchor:focus {
   outline: none;
-}
-
-.markdown-body p,
-.markdown-body blockquote,
-.markdown-body ul,
-.markdown-body ol,
-.markdown-body dl,
-.markdown-body table,
-.markdown-body pre,
-.markdown-body details {
-  margin-top: 0;
-  margin-bottom: 16px;
 }
 
 .markdown-body blockquote > :first-child {
