@@ -1,7 +1,11 @@
 ---
 title: React의 Hooks는 어떻게 동작하는 걸까요?
 subtitle: 직접 만들어보며 분석하는, React Hooks - 1
-created_at: 2024-09-29
+created_at: 2024-09-29T00:00:00
+tags:
+  - Web
+  - FE
+  - React
 ---
 > React Hooks은 마법이 아니에요
 

@@ -2,6 +2,10 @@
 title: React의 Hooks를 따라 만들어 보기
 subtitle: 직접 만들어보며 분석하는, React Hooks - 2
 created_at: 2024-09-29T00:01:00
+tags:
+  - Web
+  - FE
+  - React
 ---
 [이전 글](./react-hooks-mg-1)에서 리액트의 훅이 어떻게 동작하는지 살펴보았어요.
 
