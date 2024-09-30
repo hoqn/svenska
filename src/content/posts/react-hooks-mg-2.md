@@ -6,6 +6,7 @@ tags:
   - Web
   - FE
   - React
+series: react-deep
 ---
 [이전 글](./react-hooks-mg-1)에서 리액트의 훅이 어떻게 동작하는지 살펴보았어요.
 
@@ -70,7 +71,7 @@ function renderElement(vnode: MyNode) {
 
   // ... 앞선 코드를 실행할게요 ...
 
-  node.$$wazow = { ...existingNode?.$$ };
+  node.$$ = { ...existingNode?.$$ };
 }
 ```
 

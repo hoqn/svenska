@@ -6,6 +6,7 @@ tags:
   - Web
   - FE
   - React
+series: react-deep
 ---
 > React Hooks은 마법이 아니에요
 
