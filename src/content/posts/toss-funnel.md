@@ -2,7 +2,7 @@
 title: "Funnel: 쏟아지는 페이지 한 방에 관리하기"
 created_at: 2024-07-27
 subtitle: "@toss Slash 23"
-tags
+tags:
   - Web
   - FE
   - React
