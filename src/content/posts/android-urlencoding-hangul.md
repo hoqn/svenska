@@ -4,8 +4,8 @@ created_at: 2021-07-21 00:00:00
 icon: 📦
 series: project-hakkyoplus
 tags:
-- 학교플러스
-- Android
+  - 학교플러스
+  - Android
 ---
 
 ## 문제점
@@ -22,7 +22,15 @@ Neis API 상에서 지역(관할 교육청) 코드는 `P10`, `E10` 등과 같이
 
 디버깅을 하다보니, 역시나 인코딩 문제가 맞았다. (~~이걸 3개월 넘게 몰랐다는 건 엄청난 잘못이다.~~)
 
-해결방안으로는 API를 요청하기 전에 URL String에  `URLEncoder.encode (String s, String enc)`를 사용하면 된다.
+해결방안으로는 API를 요청하기 전에 URL String에 `URLEncoder.encode (String s, String enc)`를 사용하면 된다.
 (특별하게 다른 의도가 없다면 `enc`는 `UTF-8`로 하면 된다.)
 
-(아마 안드로이드 6 이전엔 안드로이드 내부 인코딩이 UTF-8가 아니었기 때문에 발생한 것 같다. 자세한 건 이후에 찾아보려고 한다.)
+## 원인
+
+안드로이드 6 미만에선 URL Encoding이 기본적으로 UTF8으로 되어 있지 않았다.
+
+`application/x-www-form-urlencoded` 형식의 데이터가 ASCII 기반으로 인코딩되는 방식이었고, 안드로이드 기본 API에서도 URL을 인코딩할 때 ISO-8859-1 인코딩을 사용하는 경우가 많았다고 한다.
+
+6 이후로는 기본적으로 모두 UTF8 인코딩을 사용하기 때문에 비로마자 문자 사용 시에도 크게 신경 쓰지 않아도 된다.
+
+https://stackoverflow.com/questions/49386588/volley-does-not-work-correctly-when-url-has-utf-8-on-android-version-less-than-5
