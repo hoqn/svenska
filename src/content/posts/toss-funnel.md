@@ -2,9 +2,14 @@
 title: "Funnel: 쏟아지는 페이지 한 방에 관리하기"
 created_at: 2024-07-27
 subtitle: "@toss Slash 23"
+tags
+  - Web
+  - FE
+  - React
 ---
+
 > [!note] 일러두기
-> 
+>
 > [토스 Slash 2023](https://www.youtube.com/watch?v=NwLWX2RNVcw)에서 다룬 내용을 토대로, 저만의 순서와 언어로 재구성했습니다.
 
 ## Funnel in marketing
@@ -76,8 +81,10 @@ Funnel --> 4
 유저가 기입/선택한 정보는 `registerData`, 현재 스텝은 `step`이라는 지역 상태로 관리한다.
 
 ```ts
-const [registerData, setRegisterData] = useState()
-const [step, setStep] = useState<"가입방식"|"주민번호"|"집주소"|"가입성공">("가입방식")
+const [registerData, setRegisterData] = useState();
+const [step, setStep] = useState<
+  "가입방식" | "주민번호" | "집주소" | "가입성공"
+>("가입방식");
 ```
 
 한 흐름으로 관리해야 하는 UI들을 넣는다.
@@ -99,14 +106,16 @@ return (
 `step`에 따라 조건부로 하위 페이지를 선택해 렌더링한다.
 
 ```tsx
-const [registerData, setRegisterData] = useState()
-const [step, setStep] = useState<"가입방식"|"주민번호"|"집주소"|"가입성공">("가입방식")
+const [registerData, setRegisterData] = useState();
+const [step, setStep] = useState<
+  "가입방식" | "주민번호" | "집주소" | "가입성공"
+>("가입방식");
 
 return (
   <main>
-    {step === "가입방식" && <가입방식 onNext={(data) => setStep("주민번호")} />} 
-    {step === "주민번호" && <주민번호 onNext={() => setStep("집주소")} />} 
-    {step === "집주소" && <집주소 onNext={async () => setStep("가입성공")} />} 
+    {step === "가입방식" && <가입방식 onNext={(data) => setStep("주민번호")} />}
+    {step === "주민번호" && <주민번호 onNext={() => setStep("집주소")} />}
+    {step === "집주소" && <집주소 onNext={async () => setStep("가입성공")} />}
     {step === "가입성공" && <가입성공 />}
   </main>
 );
@@ -116,10 +125,16 @@ API 호출에 필요한 상태를 한 번에 관리한다.
 
 ```tsx
 // 생략
-    {step === "가입방식" && <가입방식 onNext={(data) => {
-      setRegisterData(prev => ({...prev, 가입방식: data}))
-      setStep("주민번호");
-    }} />} 
+{
+  step === "가입방식" && (
+    <가입방식
+      onNext={(data) => {
+        setRegisterData((prev) => ({ ...prev, 가입방식: data }));
+        setStep("주민번호");
+      }}
+    />
+  );
+}
 // 생략
 ```
 
@@ -132,15 +147,17 @@ API 호출에 필요한 상태를 한 번에 관리한다.
 먼저, `step`과 관련된 로직을 묶을 수 있다. 여기선 `Step`이라는 컴포넌트를 통해 묶어주었다.
 
 ```tsx
-const [registerData, setRegisterData] = useState()
-const [step, setStep] = useState<"가입방식"|"주민번호"|"집주소"|"가입성공">("가입방식")
+const [registerData, setRegisterData] = useState();
+const [step, setStep] = useState<
+  "가입방식" | "주민번호" | "집주소" | "가입성공"
+>("가입방식");
 
 return (
   <main>
     <Step if={step === "가입방식"}>
       <가입방식 onNext={() => setStep("주민번호")} />
     </Step>
-  // ...
+    // ...
   </main>
 );
 ```
@@ -148,15 +165,17 @@ return (
 위 패턴에서 각 스텝은 `step` 상태에 따라서만 조건이 정해지므로 아래와 같이 더 추상화할 수 있다.
 
 ```tsx
-const [registerData, setRegisterData] = useState()
-const [step, setStep] = useState<"가입방식"|"주민번호"|"집주소"|"가입성공">("가입방식")
+const [registerData, setRegisterData] = useState();
+const [step, setStep] = useState<
+  "가입방식" | "주민번호" | "집주소" | "가입성공"
+>("가입방식");
 
 return (
   <main>
     <Step name="가입방식">
       <가입방식 onNext={() => setStep("주민번호")} />
     </Step>
-  // ...
+    // ...
   </main>
 );
 ```
@@ -170,9 +189,9 @@ function useFunnel() {
   const Step = (props) => {
     return <>{props.children}</>;
   };
-  
+
   const Funnel = ({ children }) => {
-    const targetStep = children.find(child => child.props.name === step);
+    const targetStep = children.find((child) => child.props.name === step);
     return Object.assign(targetStep, { Step });
   };
 
@@ -184,7 +203,7 @@ function useFunnel() {
 
 ```tsx
 const [registerData, setRegisterData] = useState();
-const [Funnel, setStep] = useFunnel<"가입방식"|"주민번호">("가입방식");
+const [Funnel, setStep] = useFunnel<"가입방식" | "주민번호">("가입방식");
 
 return (
   <Funnel>
@@ -193,7 +212,7 @@ return (
     </Funnel.Step>
     // ...
   </Funnel>
-)
+);
 ```
 
 추가적으로 라우터 히스토리와 함께 관리할 수 있다.
@@ -201,12 +220,12 @@ return (
 ```tsx
 function useFunnel() {
   const step = useQueryParam("step");
-  
+
   const setStep = (step: string) => {
-    const nextUrl = `${QS.create({...prevQuery, step })}`;
+    const nextUrl = `${QS.create({ ...prevQuery, step })}`;
     router.push(url, undefined, { shallow: true });
   };
-  
+
   //...
 }
 ```
@@ -214,5 +233,3 @@ function useFunnel() {
 ## 마무리
 
 이후에도 Funnel과 관련된 더 많은 내용(DX를 위한 디버깅 툴 등)이 [발표](https://www.youtube.com/watch?v=NwLWX2RNVcw)에서 설명되고 있다.
-
-
